@@ -7,6 +7,7 @@ public class OrderDetail {
 	private String mail;//購入者メールアドレス
 	private String uniId;//商品名
 	private int buyQuantity;//購入個数
+	private String other;//備考欄
 	private String day;//注文日
 
 	public OrderDetail() {
@@ -57,6 +58,14 @@ public class OrderDetail {
 
 	public void setBuyQuantity(int buyQuantity) {
 		this.buyQuantity = buyQuantity;
+	}
+	
+	public String getOter() {
+		return other;
+	}
+
+	public void setOther(String other) {
+		this.other = other;
 	}
 
 	public String getDay() {

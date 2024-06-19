@@ -1,0 +1,64 @@
+<%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%
+//リクエストスコープからのデータの取得
+//ArrayList<Book> list = (ArrayList<Book>) request.getAttribute("book_list");
+%>
+
+<html>
+<head>
+<title>cart</title>
+</head>
+<body style = "background: linear-gradient(45deg, #ffff00, #ffccff)">
+	<table style="margin: auto; width: 1300px;">
+		<tr>
+			<td style="text-align: left; width: 100px;">[<a
+				href="<%=request.getContextPath()%>/view/buy.jsp">購入画面へ</a>]
+			</td>
+			<td><h2 style="padding-left: 470px;">商品をカートへ追加しました。</h2></td>
+		</tr>
+	</table>
+		<hr
+			style="text-align: center; height: 5px; background-color: black; width: 100%;">
+		<table style="margin: auto; padding: 60px; width: 50%">
+			<tr>
+				<th style="background-color: #BBBBBB; width: 200">商品</th>
+				<th style="background-color: #BBBBBB; width: 200">購入個数</th>
+				<th style="background-color: #BBBBBB; width: 200">小計</th>
+			</tr>
+
+			<%
+//if (list != null) {
+//for (int i = 0; i < list.size(); i++) {
+%>
+			<tr>
+				<form action="<%=request.getContextPath()%>/view/buyConfirm.jsp" method="post">
+					<td style="text-align: center; background-color: #EEEEEE">仮商品名</td>
+					<td style="text-align: center; background-color: #EEEEEE">仮商品個数(個)</td>
+					<td style="text-align: center; background-color: #EEEEEE">商品名 * 個数</td>
+			</tr>
+			<%
+//}
+//}
+%>
+		</table>
+		<br>
+		<table style="margin: auto">
+			<tr>
+			<th style="background-color: #BBBBBB; width: 100px">合計</th>
+			<th style="text-align: center; background-color: #EEEEEE; width: 150px">小計 + 小計</th>
+			</tr>
+		</table>
+		<table style="margin: auto; padding: 60px">
+		<center>
+			<input type="submit" value="購入">
+		</center>
+		</form>
+		<form action="<%=request.getContextPath()%>/view/buy.jsp" method="buy">
+		<center>
+			<input type="submit" value="さらに追加">
+		</center>
+		</form>
+		</table>
+</body>
+</html>

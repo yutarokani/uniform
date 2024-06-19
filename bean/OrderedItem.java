@@ -3,13 +3,10 @@ package bean;
 public class OrderedItem {
 
 	// フィールド変数定義
-	private int ordernumber; // 注文番号
+	private int ordernumber;    // 注文番号
 	private String name;        // 氏名
-	private String mail;        // メール
-	private String addres;      // 住所
 	private String uniname;     // 商品名
-	private String other;       // 備考欄
-	private String day;         // 注文日
+	private int buyquantity;    // 購入個数
 	private String sendday;     // 発送日
 	private String payment;     // 入金状況
 	private String shipping;    // 発送状況
@@ -19,11 +16,8 @@ public class OrderedItem {
 	public OrderedItem(){
 		this.ordernumber = 0;
 		this.name = null;
-		this.mail = null;
-		this.addres = null;
 		this.uniname = null;
-		this.other = null;
-		this.day = null;
+		this.buyquantity = 0;
 		this.sendday = null;
 		this.payment = null;
 		this.shipping = null;
@@ -46,24 +40,6 @@ public class OrderedItem {
 	public void setName(String name) {
 		this.name = name;
 	}
-		
-	// mail アクセサメソッド
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-	
-	// addres アクセサメソッド
-	public String getAddres() {
-		return addres;
-	}
-
-	public void setAddres(String addres) {
-		this.addres = addres;
-	}
 	
 	// uniname アクセサメソッド
 	public String getUniname() {
@@ -74,22 +50,13 @@ public class OrderedItem {
 		this.uniname = uniname;
 	}
 	
-	// other アクセサメソッド
-	public String getOther() {
-		return other;
-	}
-
-	public void setOther(String other) {
-		this.other = other;
+	// buyquantity アクセサメソッド
+	public int getBuyquantity() {
+		return buyquantity;
 	}
 	
-	// day アクセサメソッド
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
+	public void setBuyquantity(int buyquantity) {
+		this.buyquantity = buyquantity;
 	}
 	
 	// sendday アクセサメソッド
