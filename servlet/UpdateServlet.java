@@ -75,13 +75,9 @@ public class UpdateServlet extends HttpServlet {
 
 				//Bookのオブジェクトを生成し、各setterメソッドを利用し、②で取得したやつを設定
 				OrderedItem ordereditem = new OrderedItem();
-				ordereditem.setOrdernumber(ordernumber);
+				ordereditem.setOrdernumber(Integer.parseInt(ordernumber));
 				ordereditem.setName(name);
-				ordereditem.setMail(mail);
-				ordereditem.setAddres(addres);
 				ordereditem.setUniname(uniname);
-				ordereditem.setOther(other);
-				ordereditem.setDay(day);
 				ordereditem.setSendday(sendday);
 				ordereditem.setPayment(payment);
 				ordereditem.setShipping(shipping);
