@@ -2,8 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import bean.OrderedItem;
-import dao.OrderedItemDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,7 +33,7 @@ public class UpdateServlet extends HttpServlet {
 			String shipping = request.getParameter("shipping"); //発送状況
 
 			//オブジェクト生成
-			OrderedItemDAO objOrderedItemDAO = new OrderedItemDAO();
+			OrderedInfoDAO objOrderedItemDAO = new OrderedInfoDAO();
 
 			//それぞれが未入力の時のエラー表示
 			if (ordernumber.equals("")) {
@@ -74,16 +72,16 @@ public class UpdateServlet extends HttpServlet {
 			} else {
 
 				//Bookのオブジェクトを生成し、各setterメソッドを利用し、②で取得したやつを設定
-				OrderedItem ordereditem = new OrderedItem();
-				ordereditem.setOrdernumber(Integer.parseInt(ordernumber));
-				ordereditem.setName(name);
-				ordereditem.setUniname(uniname);
-				ordereditem.setSendday(sendday);
-				ordereditem.setPayment(payment);
-				ordereditem.setShipping(shipping);
+				Order order = new Order();
+				order.setOrdernumber(Integer.parseInt(ordernumber));
+				order.setName(name);
+				order.setUniname(uniname);
+				order.setSendday(sendday);
+				order.setPayment(payment);
+				order.setShipping(shipping);
 
 				//③で設定したOrderedItemのオブジェクトを引数として、OrderedItemDAOをインスタンス化し、関連メソッドを呼び出す
-				objOrderedItemDAO.update(ordereditem);
+				objOrderedItemDAO.update(order);
 
 			}
 		} catch (IllegalStateException e) {
