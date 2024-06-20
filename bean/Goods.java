@@ -1,22 +1,16 @@
 package bean;
 
 public class Goods {
+	//商品ID
+	private String uniId;
+	//商品名
+	private String uniName;
+	//在庫数
+	private int stock;
+	//価格
+	private int price;
 
-	private String uniId;	//商品ID
-
-	private String uniName;	//商品名
-
-	private int stock;		//在庫数
 	
-	private int price;		//価格
-
-	public Goods() {
-		this.uniId = null;
-		this.uniName = null;
-		this.stock = 0;
-		this.price = 0;
-	}
-
 	public String getUniId() {
 		return uniId;
 	}

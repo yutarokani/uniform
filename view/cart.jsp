@@ -32,7 +32,7 @@
 //for (int i = 0; i < list.size(); i++) {
 %>
 			<tr>
-				<form action="<%=request.getContextPath()%>/view/buyConfirm.jsp" method="post">
+				<form action="<%=request.getContextPath()%>/view/customer.jsp" method="post">
 					<td style="text-align: center; background-color: #EEEEEE">仮商品名</td>
 					<td style="text-align: center; background-color: #EEEEEE">仮商品個数(個)</td>
 					<td style="text-align: center; background-color: #EEEEEE">商品名 * 個数</td>

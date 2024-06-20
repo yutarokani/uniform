@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 
+import bean.OrderInfo;
+import dao.OrderInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +27,7 @@ public class UpdateServlet extends HttpServlet {
 			String name = request.getParameter("name"); //氏名
 			String mail = request.getParameter("mail"); //メール
 			String addres = request.getParameter("addres"); //住所
-			String uniname = request.getParameter("uniname"); //商品名
+			String uniid = request.getParameter("uniid"); //商品ID
 			String other = request.getParameter("other"); //備考欄
 			String day = request.getParameter("day"); //注文日
 			String sendday = request.getParameter("sendday"); //発送日
@@ -33,7 +35,7 @@ public class UpdateServlet extends HttpServlet {
 			String shipping = request.getParameter("shipping"); //発送状況
 
 			//オブジェクト生成
-			OrderedInfoDAO objOrderedItemDAO = new OrderedInfoDAO();
+			OrderInfoDAO objOrderedItemDAO = new OrderInfoDAO();
 
 			//それぞれが未入力の時のエラー表示
 			if (ordernumber.equals("")) {
@@ -48,7 +50,7 @@ public class UpdateServlet extends HttpServlet {
 			} else if (addres.equals("")) {
 				error = "住所が未入力の為、書籍登録処理は行えませんでした。";
 
-			} else if (uniname.equals("")) {
+			} else if (uniid.equals("")) {
 				error = "商品名が未入力の為、書籍登録処理は行えませんでした。";
 
 			} else if (other.equals("")) {
@@ -72,16 +74,16 @@ public class UpdateServlet extends HttpServlet {
 			} else {
 
 				//Bookのオブジェクトを生成し、各setterメソッドを利用し、②で取得したやつを設定
-				Order order = new Order();
-				order.setOrdernumber(Integer.parseInt(ordernumber));
-				order.setName(name);
-				order.setUniname(uniname);
-				order.setSendday(sendday);
-				order.setPayment(payment);
-				order.setShipping(shipping);
+				OrderInfo orderinfo = new OrderInfo();
+				orderinfo.setOrderNumber(Integer.parseInt(ordernumber));
+				orderinfo.setName(name);
+				orderinfo.setUniId(uniid);
+				orderinfo.setSendDay(sendday);
+				orderinfo.setPayment(payment);
+				orderinfo.setShipping(shipping);
 
 				//③で設定したOrderedItemのオブジェクトを引数として、OrderedItemDAOをインスタンス化し、関連メソッドを呼び出す
-				objOrderedItemDAO.update(order);
+				objOrderedItemDAO.update(orderinfo);
 
 			}
 		} catch (IllegalStateException e) {

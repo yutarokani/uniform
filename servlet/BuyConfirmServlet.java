@@ -1,15 +1,16 @@
+package servlet;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.Admin;
-import bean.Order;
+import bean.OrderInfo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.sendMail;
 
 @WebServlet("/buyConfirm")
 public class BuyConfirmServlet extends HttpServlet {
@@ -34,8 +35,11 @@ public class BuyConfirmServlet extends HttpServlet {
 				return;
 			}
 			
-			// セッションから"order_list"を取得する。(カートの中身がない場合はerror.jspに遷移する)
-			ArrayList<Order> order_list = (ArrayList<Order>)session.getAttribute("order_list");
+			/*
+			 * セッションから、カートの中身を表す"order_list"を取得する。
+			 * (カートの中身がない場合はerror.jspに遷移する)
+			 */
+			ArrayList<OrderInfo> order_list = (ArrayList<OrderInfo>)session.getAttribute("order_list");
 			
 			if(order_list.size() == 0) {
 				error = "カートの中に何もなかったので購入は出来ません。";
@@ -44,11 +48,11 @@ public class BuyConfirmServlet extends HttpServlet {
 			}
 			
 			// Orderオブジェクトを格納する配列を作成
-			ArrayList<Order> order = new ArrayList<Order>();
+			ArrayList<OrderInfo> order = new ArrayList<OrderInfo>();
 			
 			// 関連メソッドをorder_listの(カート追加データ分）だけ呼び出す。
 			for(int i = 0;i < order_list.size();i++) {
-				Order addorder = order_list.get(i);
+				OrderInfo addorder = order_list.get(i);
 				
 				// 取得した各OrderをListに追加
 				order.add(addorder);
@@ -56,8 +60,6 @@ public class BuyConfirmServlet extends HttpServlet {
 			
 			// リクエストスコープに"book_list"という名前で格納
 			request.setAttribute("deforder",order);
-			
-			sendMail.main(null);
 			
 			// セッションの"order_list"情報をクリアする。
 			session.setAttribute("order_list",null);

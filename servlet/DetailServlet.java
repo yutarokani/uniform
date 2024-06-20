@@ -2,8 +2,8 @@ package servlet;
 
 import java.io.IOException;
 
-import bean.OrderDetail;
-import dao.OrderDetailDAO;
+import bean.OrderInfo;
+import dao.OrderInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,8 +19,8 @@ public class DetailServlet extends HttpServlet {
 
 		try {
 
-			//OrderDetailDAOクラスのオブジェクトを生成
-			OrderDetailDAO orderDetailDao = new OrderDetailDAO();
+			//OrderInfoDAOクラスのオブジェクトを生成
+			OrderInfoDAO orderInfoDao = new OrderInfoDAO();
 
 			//画面から送信されるISBNとcmd情報を受け取るためのエンコードを設定
 			request.setCharacterEncoding("UTF-8");
@@ -29,24 +29,24 @@ public class DetailServlet extends HttpServlet {
 			String orderNumber = request.getParameter("orderNumber");
 			cmd = request.getParameter("cmd");
 
-			//OrderDetailDAOクラスに定義したselectByOrderDetail（）メソッドを利用して詳細情報を取得
-			OrderDetail orderDetail = orderDetailDao.selectByOrderNumber(orderNumber);
+			//OrderInfoDAOクラスに定義したselectByOrderDetail（）メソッドを利用して詳細情報を取得
+			OrderInfo orderInfo = orderInfoDao.selectByOrderNumber(orderNumber);
 
 			//エラーチェック
-			if (orderDetail.getOrderNumber() == 0 && !cmd.equals("update")) {//戻り値のオブジェクトにデータが存在しない場合
+			if (orderInfo.getOrderNumber() == 0 && !cmd.equals("update")) {//戻り値のオブジェクトにデータが存在しない場合
 				error = "表示対象の受注が存在しない為、詳細情報は表示できませんでした。";
 				cmd = "list";
 				return;
 			}
 
-			if (orderDetail.getOrderNumber() == 0 && cmd.equals("update")) {//戻り値のオブジェクトにデータが存在しない場合
+			if (orderInfo.getOrderNumber() == 0 && cmd.equals("update")) {//戻り値のオブジェクトにデータが存在しない場合
 				error = "更新対象の受注が存在しない為、変更画面は表示できませんでした。";
 				cmd = "list";
 				return;
 			}
 
-			//取得した書籍情報を「orderDetail」という名前でリクエストスコープに登録
-			request.setAttribute("orderDetail", orderDetail);
+			//取得した書籍情報を「orderInfo」という名前でリクエストスコープに登録
+			request.setAttribute("orderInfo", orderInfo);
 
 		} catch (IllegalStateException e) {
 

@@ -169,4 +169,41 @@ public class GoodsDAO {
 		}
 		return goods;
 	}
+	//名前検索
+	public Goods selectByuniname(String uniname) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		Goods goods = new Goods();
+
+		try {
+			String sql = "SELECT uniName,uniId,stock,price FROM uniforminfo WHERE uniName = '" + uniname + "'";
+			con = GoodsDAO.getConnection();
+			smt = con.createStatement();
+			ResultSet rs = smt.executeQuery(sql);
+			while (rs.next()) {
+				goods.setUniId(rs.getString("uniId"));
+				goods.setUniName(rs.getString("uniName"));
+				goods.setStock(rs.getInt("stock"));
+				goods.setPrice(rs.getInt("price"));
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return goods;
 	}
+}

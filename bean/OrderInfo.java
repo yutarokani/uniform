@@ -3,40 +3,40 @@ package bean;
 public class OrderInfo {
 
 	// フィールド変数定義
-	private String ordernumber; // 注文番号
+	private int orderNumber; // 注文番号
 	private String name; // 氏名
 	private String mail;//メール
 	private String address;//住所
-	private String uniname; // 商品名
+	private String uniId; // 商品ID
 	private String other;//備考欄
-	private int buyquantity; // 購入個数
+	private int buyQuantity; // 購入個数
 	private String day;//注文日
-	private String sendday; // 発送日
+	private String sendDay; // 発送日
 	private String payment; // 入金状況
 	private String shipping; // 発送状況
 
 	// コンストラクタ定義（初期化処理）
 	public OrderInfo() {
-		this.ordernumber = null;
+		this.orderNumber = 0;
 		this.name = null;
 		this.mail = null;
 		this.address = null;
-		this.uniname = null;
+		this.uniId = null;
 		this.other = null;
-		this.buyquantity = 0;
+		this.buyQuantity = 0;
 		this.day = null;
-		this.sendday = null;
+		this.sendDay = null;
 		this.payment = null;
 		this.shipping = null;
 	}
 
 	// ordernumber アクセサメソッド
-	public String getOrdernumber() {
-		return ordernumber;
+	public int getOrderNumber() {
+		return orderNumber;
 	}
 
-	public void setOrdernumber(String ordernumber) {
-		this.ordernumber = ordernumber;
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	// name アクセサメソッド
@@ -65,12 +65,12 @@ public class OrderInfo {
 	}
 
 	// uniname アクセサメソッド
-	public String getUniname() {
-		return uniname;
+	public String getUniId() {
+		return uniId;
 	}
 
-	public void setUniname(String uniname) {
-		this.uniname = uniname;
+	public void setUniId(String uniId) {
+		this.uniId = uniId;
 	}
 	
 	public String getOther() {
@@ -82,15 +82,15 @@ public class OrderInfo {
 	}
 
 	// number アクセサメソッド
-	public int getBuyquantity() {
-		return buyquantity;
+	public int getBuyQuantity() {
+		return buyQuantity;
 	}
 
-	public void setBuyquantity(int buyquantity) {
-		this.buyquantity = buyquantity;
+	public void setBuyQuantity(int buyQuantity) {
+		this.buyQuantity = buyQuantity;
 	}
 	
-	public String getDday() {
+	public String getDay() {
 		return day;
 	}
 
@@ -99,12 +99,12 @@ public class OrderInfo {
 	}
 
 	// sendday アクセサメソッド
-	public String getSendday() {
-		return sendday;
+	public String getSendDay() {
+		return sendDay;
 	}
 
-	public void setSendday(String sendday) {
-		this.sendday = sendday;
+	public void setSendDay(String sendday) {
+		this.sendDay = sendday;
 	}
 
 	// payment アクセサメソッド

@@ -3,7 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import bean.OrderedItem;
+import bean.OrderInfo;
+import dao.OrderInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,16 +18,16 @@ public class ListServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// OrderedItemDAOクラスのオブジェクトを生成
-		OrderedInfoDAO objDao = new OrderedInfoDAO();
+		OrderInfoDAO objDao = new OrderInfoDAO();
 
-		Order order = new Order();
+		OrderInfo order = new OrderInfo();
 
 		String error = "";
 
 		try {
 
 			// 書籍情報を格納するAllayListオブジェクトを生成、OrderedItemDAOクラスに定義した、selectAll()メソッドを利用して書籍情報を取得
-			ArrayList<OrderedItem> orderList = objDao.selectAll();
+			ArrayList<OrderInfo> orderList = objDao.selectAll();
 
 			// 取得した書籍情報を「order_list」という名前でリクエストスコープに登録
 			request.setAttribute("order_list", orderList);

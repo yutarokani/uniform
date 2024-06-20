@@ -11,6 +11,13 @@
 </head>
 <body style = "background: linear-gradient(45deg, #e6e6fa, #afaffa); color: #333300">
 	<h1 style="text-align: center">更新</h1>
+	<table>
+		<center>
+		<td style="text-align: left; width: 100px;">[<a
+				href="<%=request.getContextPath()%>/view/list.jsp">一覧へ</a>]
+			</td>
+	</center>
+	</table>
 	<hr
 		style="text-align: center; height: 5px; background-color: black; width: 100%;">
 	<h4 style="margin: 3% 25%">商品No</h4>
@@ -41,14 +48,14 @@
 			<td><h3 style="background-color: #BBBBBB">ステータス変更</h3></td>
 		</tr>
 		<tr>
-				<td style="text-align: center; background-color: #EEEEEE">未発送</td>
-				<td><select name="updateCa">
-							<option value="">ステータスを選択</option>
-							<option>未</option>
-							<option>発送準備中</option>
-							<option>発送済み</option>
-							<option>その他</option>
-				</select></td>
+			<th style="text-align: center; background-color: #EEEEEE">未発送</th>
+			<th><select name="updateCa">
+						<option value="">ステータスを選択</option>
+						<option>未</option>
+						<option>発送準備中</option>
+						<option>発送済み</option>
+						<option>その他</option>
+			</select></th>
 		</tr>
 		
 	</table>
@@ -60,10 +67,6 @@
 		
 	</form>
 	<br>
-	<center>
-		<td style="text-align: left; width: 100px;">[<a
-				href="<%=request.getContextPath()%>/view/list.jsp">一覧へ</a>]
-			</td>
-	</center>
+
 </body>
 </html>
