@@ -28,6 +28,10 @@ public class DeleteServlet extends HttpServlet {
 			error = "DB接続エラーの為、一覧表示は行えませんでした。";
 			cmd = "menu";
 		} finally {
+			
+			request.setAttribute("error", error);
+			request.setAttribute("cmd", cmd);
+			
 			if (error.equals("")) {
 				request.getRequestDispatcher("/view/list.jsp").forward(request, response);
 			}

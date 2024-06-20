@@ -2,8 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import bean.Goods;
 
@@ -36,11 +38,9 @@ public class GoodsDAO {
 		try {
 
 			String sql = "INSERT INTO uniforminfo VALUES('" + goods.getUniId() + "','" + goods.getUniName() + "',"
-					+ goods.getStock() + "','" + goods.getPrice() + "')";
-			
-			con = getConnection();
+					+ goods.getStock() + "','" + goods.getPrice() + "',"+")";
+			con = GoodsDAO.getConnection();
 			smt = con.createStatement();
-			
 			smt.executeUpdate(sql);
 
 		} catch (Exception e) {
@@ -58,7 +58,115 @@ public class GoodsDAO {
 				} catch (SQLException ignore) {
 				}
 			}
-
 		}
 	}
-}
+
+	public void delete(String uniId) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+			String sql = "DELETE FROM uniforminfo WHERE uniId = '" + uniId + "'";
+
+			con = GoodsDAO.getConnection();
+			smt = con.createStatement();
+
+			smt.executeQuery(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+	}
+
+	public ArrayList<Goods> selectAll() {
+		Connection con = null;
+		Statement smt = null;
+		ArrayList<Goods> goodsList = new ArrayList<Goods>();
+
+		try {
+			con = getConnection();
+			smt = con.createStatement();
+
+			String sql = "SELECT * FROM uniforminfo ORDER BY uniId";
+			ResultSet rs = smt.executeQuery(sql);
+
+			while (rs.next()) {
+				Goods goods = new Goods();
+				goods.setUniId(rs.getString("uniId"));
+				goods.setUniName(rs.getString("uniName"));
+				goods.setStock(rs.getInt("stock"));
+				goods.setPrice(rs.getInt("price"));
+				goodsList.add(goods);
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return goodsList;
+	}
+
+	public Goods selectByuniId(String uniId) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		Goods goods = new Goods();
+
+		try {
+			String sql = "SELECT uniId,uniName,stock,price FROM uniforminfo WHERE uniId = '" + uniId + "'";
+			con = GoodsDAO.getConnection();
+			smt = con.createStatement();
+			ResultSet rs = smt.executeQuery(sql);
+			while (rs.next()) {
+				goods.setUniId(rs.getString("uniId"));
+				goods.setUniName(rs.getString("uniName"));
+				goods.setStock(rs.getInt("stock"));
+				goods.setPrice(rs.getInt("price"));
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return goods;
+	}
+	}
