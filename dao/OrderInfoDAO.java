@@ -129,7 +129,7 @@ public class OrderInfoDAO {
 
 		try {
 
-			//orderinfoの全部のデータとorderdetailのuniidを検索するSQL
+			//orderinfoのordernumberを検索するSQL
 			String sql = "SELECT * FROM orderinfo WHERE ordernumber = " + orderNumber + ";";
 
 			//BookDAOクラスに定義した、getConnection()メソッドを利用してConnectionオブジェクトを生成
@@ -139,6 +139,7 @@ public class OrderInfoDAO {
 
 			ResultSet rs = smt.executeQuery(sql);
 			
+			//結果セットからデータを取り出し、orderDetailオブジェクトに格納
 			while(rs.next()) {
 				orderInfo.setOrderNumber(rs.getInt("orderNumber"));
 				orderInfo.setName(rs.getString("name"));
@@ -151,7 +152,8 @@ public class OrderInfoDAO {
 				orderInfo.setShipping(rs.getString("shipping"));
 			}
 			
-			sql = "SELECT uniforminfo.uniname,orderdetail.number FROM orderdetail "
+			//uniforminfoからuninameとorderdetailからbuyquantityを検索するSQL
+			sql = "SELECT uniforminfo.uniId,orderdetail.buyquantity FROM orderdetail "
 					+ "INNER JOIN uniforminfo ON "
 					+ "orderdetail.uniid = uniforminfo.uniid "
 					+ "WHERE orderdetail.ordernumber = " + orderNumber + ";";
