@@ -1,8 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="bean.OrderInfo,dao.OrderDetailDAO"%>
+<%@page import="bean.OrderInfo,dao.OrderDetailDAO,java.util.ArrayList"%>
 
 <%
 OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	//DetailServletからデータを受け取る
+ArrayList<OrderInfo> order_list = (ArrayList)request.getAttribute("order_list");
 %>
 
 <html>
@@ -42,14 +43,16 @@ OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	//DetailServ
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入者住所</th>
 			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getAdress() %></td>
 		</tr>
+		<%for(int i = 0; i < order_list.size(); i++){ %>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入した商品番号</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getUniId() %></td>
+			<td style="width:400px; background-color: #EEEEEE;"><%=order_list.get(i).getUniId() %></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入数</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getBuyQuantity() %></td>
+			<td style="width:400px; background-color: #EEEEEE;"><%=order_list.get(i).getBuyQuantity() %></td>
 		</tr>
+		<%} %>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">注文日</th>
 			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getDay() %></td>

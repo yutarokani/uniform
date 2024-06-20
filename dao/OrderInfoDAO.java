@@ -152,21 +152,6 @@ public class OrderInfoDAO {
 				orderInfo.setShipping(rs.getString("shipping"));
 			}
 			
-			//uniforminfoからuninameとorderdetailからbuyquantityを検索するSQL
-			sql = "SELECT uniforminfo.uniId,orderdetail.buyquantity FROM orderdetail "
-					+ "INNER JOIN uniforminfo ON "
-					+ "orderdetail.uniid = uniforminfo.uniid "
-					+ "WHERE orderdetail.ordernumber = " + orderNumber + ";";
-			
-			rs = smt.executeQuery(sql);
-
-			//結果セットからデータを取り出し、orderDetailオブジェクトに格納
-			while (rs.next()) {
-				orderInfo.setUniId(rs.getString("uniId"));
-				orderInfo.setBuyQuantity(rs.getInt("buyQuantity"));
-
-			}
-
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		} finally {
@@ -185,7 +170,43 @@ public class OrderInfoDAO {
 		}
 		return orderInfo;
 	}
-	
+
+	public ArrayList<OrderInfo> order(String orderNumber){
+		Connection con = null;
+		Statement smt = null;
+		ArrayList<OrderInfo> order_list = new ArrayList<OrderInfo>();
+
+		//検索した受注詳細情報を格納するOrderInfoオブジェクトを生成
+		OrderInfo orderInfo = new OrderInfo();
+		try {
+
+			//uniforminfoからuninameとorderdetailからbuyquantityを検索するSQL
+			String sql = "SELECT uniforminfo.uniId,orderdetail.buyquantity FROM orderdetail "
+					+ "INNER JOIN uniforminfo ON "
+					+ "orderdetail.uniid = uniforminfo.uniid "
+					+ "WHERE orderdetail.ordernumber = " + orderNumber + ";";
+
+			//BookDAOクラスに定義した、getConnection()メソッドを利用してConnectionオブジェクトを生成
+			con = getConnection();
+			//ConnectionオブジェクトのcreateStatement（）メソッドを利用してStatementオブジェクトを生成
+			smt = con.createStatement();
+
+			ResultSet rs = smt.executeQuery(sql);
+
+			//結果セットからデータを取り出し、orderDetailオブジェクトに格納
+			while (rs.next()) {
+				orderInfo.setUniId(rs.getString("uniId"));
+				orderInfo.setBuyQuantity(rs.getInt("buyQuantity"));
+				order_list.add(orderInfo);
+
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} 
+		return order_list;
+	}
+		
 	public void insert(OrderInfo order) {
 
         Connection con = null;

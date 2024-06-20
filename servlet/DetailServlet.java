@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import bean.OrderInfo;
 import dao.OrderInfoDAO;
@@ -31,6 +32,7 @@ public class DetailServlet extends HttpServlet {
 
 			//OrderInfoDAOクラスに定義したselectByOrderDetail（）メソッドを利用して詳細情報を取得
 			OrderInfo orderInfo = orderInfoDao.selectByOrderNumber(orderNumber);
+			ArrayList<OrderInfo> order_list = orderInfoDao.order(orderNumber);
 
 			//エラーチェック
 			if (orderInfo.getOrderNumber() == 0 && !cmd.equals("update")) {//戻り値のオブジェクトにデータが存在しない場合
@@ -47,6 +49,7 @@ public class DetailServlet extends HttpServlet {
 
 			//取得した書籍情報を「orderInfo」という名前でリクエストスコープに登録
 			request.setAttribute("orderInfo", orderInfo);
+			request.setAttribute("order_list", order_list);
 
 		} catch (IllegalStateException e) {
 
