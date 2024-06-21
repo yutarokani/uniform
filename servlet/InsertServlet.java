@@ -31,15 +31,15 @@ public class InsertServlet extends HttpServlet {
 			Goods goods1 = goodsDao.selectByuniId(uniId);
 
 			if (request.getParameter("uniId").equals("")) {
-				error = "uniIdが未入力の為、書籍登録処理は行えませんでした。";
+				error = "uniIdが未入力の為、商品登録処理は行えませんでした。";
 			} else if (request.getParameter("uniName").equals("")) {
-				error = "uniNameが未入力の為、書籍登録処理は行えませんでした。";
+				error = "uniNameが未入力の為、商品登録処理は行えませんでした。";
 			} else if (request.getParameter("stock").equals("")) {
-				error = "stockが未入力の為、書籍登録処理は行えませんでした。";
+				error = "stockが未入力の為、商品登録処理は行えませんでした。";
 			} else if (request.getParameter("price").equals("")) {
-				error = "priceが未入力の為、書籍登録処理は行えませんでした。";
+				error = "priceが未入力の為、商品登録処理は行えませんでした。";
 			} else if (request.getParameter("uniId").equals(goods1.getUniId())){
-				error = "入力uniIdは既に登録済みの為、書籍登録処理は行えませんでした。";			
+				error = "入力uniIdは既に登録済みの為、商品登録処理は行えませんでした。";			
 			} else {
 				//getParameterで取得した情報をbookオブジェクトに格納
 				goods.setUniId(request.getParameter("uniId"));
@@ -51,10 +51,10 @@ public class InsertServlet extends HttpServlet {
 			}
 				
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、書籍登録処理は行えませんでした";
+			error = "DB接続エラーの為、商品登録処理は行えませんでした";
 			cmd = "menu";
 		} catch (NumberFormatException e) {
-			error = "数値が不正の為、書籍登録処理は行えませんでした。";
+			error = "数値が不正の為、商品登録処理は行えませんでした。";
 			cmd = "menu";
 
 		} finally {
