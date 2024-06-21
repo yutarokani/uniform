@@ -7,7 +7,7 @@
 
 <html>
 <head>
-<title>cart</title>
+<title>カート画面</title>
 </head>
 <body style = "background: linear-gradient(45deg, #ffff00, #ffccff)">
 	<table style="margin: auto; width: 1300px;">
@@ -15,12 +15,12 @@
 			<td style="text-align: left; width: 100px;">[<a
 				href="<%=request.getContextPath()%>/view/buy.jsp">購入画面へ</a>]
 			</td>
-			<td><h2 style="padding-left: 470px;">商品をカートへ追加しました。</h2></td>
+			<td><h2 style="padding-left: 400px;">商品をカートへ追加しました。</h2></td>
 		</tr>
 	</table>
 		<hr
 			style="text-align: center; height: 5px; background-color: black; width: 100%;">
-		<table style="margin: auto; padding: 60px; width: 50%">
+		<table style="margin: auto; padding-top: 130px; padding-bottom: 60px; width: 50%">
 			<tr>
 				<th style="background-color: #BBBBBB; width: 200">商品</th>
 				<th style="background-color: #BBBBBB; width: 200">購入個数</th>
@@ -43,22 +43,23 @@
 %>
 		</table>
 		<br>
-		<table style="margin: auto">
+		<table style="margin: auto; padding-bottom: 30px">
 			<tr>
 			<th style="background-color: #BBBBBB; width: 100px">合計</th>
 			<th style="text-align: center; background-color: #EEEEEE; width: 150px">小計 + 小計</th>
 			</tr>
 		</table>
-		<table style="margin: auto; padding: 60px">
+		<table style="margin: auto; padding-bottom: 30px;">
 		<center>
 			<input type="submit" value="購入">
 		</center>
 		</form>
 		<form action="<%=request.getContextPath()%>/view/buy.jsp" method="buy">
-		<center>
+		<center style="padding-top: 30px; padding-bottom: 110px;">
 			<input type="submit" value="さらに追加">
 		</center>
 		</form>
 		</table>
+		<%@include file="/common/footer.jsp"%>
 </body>
 </html>

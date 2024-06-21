@@ -3,8 +3,7 @@
 <html>
 <head>
 <title>ログイン画面</title>
-<h1 style="text-align: center;">受注管理システム</h1>
-<hr style="text-align: center; height: 5px; background-color: black;">
+<%@include file="/common/header.jsp" %>
 </head>
 <body style = "background: linear-gradient(45deg, #e6e6fa, #afaffa)">
 	<table style="margin: auto; width: 1300px;">
@@ -17,7 +16,7 @@
 	</table>
 	<hr
 		style="text-align: center; height: 2px; background-color: black; width: 100%">
-	<div style="margin-top: 60px; margin-bottom: 240px">
+	<div style="margin-top: 60px; margin-bottom: 270px">
 	<table style="margin: auto; border: 0;">
 		<form action="<%=request.getContextPath()%>/view/menu.jsp" method="post">
 			<table style="margin: auto; border: 0;">
@@ -40,13 +39,6 @@
 			</table>
 		</form>
 	</div>
-	<hr
-		style="text-align: center; height: 5px; background-color: black; width: 100%;">
-	<table
-		style="margin: auto; border: 0; width: 100%; text-align: center;">
-		<tr>
-			<td align="left">copyright (c) 2024 all rights reserved.</td>
-		</tr>
-	</table>
+	<%@include file="/common/footer.jsp" %>
 </body>
 </html>

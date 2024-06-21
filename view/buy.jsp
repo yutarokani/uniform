@@ -10,8 +10,8 @@
 		<h2 style="text-align: center">商品注文</h2>
 	</div>
 	<table>
-		<td><A href="<%=request.getContextPath()%>/view/login.jsp">トップへ戻る</A></td>
-		<td style="text-align: right"><A href="<%=request.getContextPath()%>/view/login.jsp">管理者画面</A></td>
+		<td><A href="<%=request.getContextPath()%>/view/login.jsp">[トップへ戻る]</A></td>
+		<td style="text-align: right"><A href="<%=request.getContextPath()%>/view/login.jsp">[管理者画面]</A></td>
 	</table>
 	
 	<div style="text-align: center"></div>
@@ -40,8 +40,8 @@
 			</tr>
 		</table>
 
-		<form action="<%=request.getContextPath()%>/view/cart.jsp">
-			<table style="margin: 0 auto">
+		<form style="padding-bottom: 80px;" action="<%=request.getContextPath()%>/view/cart.jsp">
+			<table style="margin: auto; padding-bottom: 20px;">
 				<tr>
 					<th style="background-color: #bbbbbb; width: 150">商品</th>
 					<td style="background-color: #eeeeee; width: 240; font-size: 100"><select name="uniformname">
@@ -68,7 +68,7 @@
 		</form>
 
 	</div>
-
+<%@include file="/common/footer.jsp"%>
 	<%--@ include file="/common/footer.jsp" --%>
 </body>
 </html>

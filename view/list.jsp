@@ -6,9 +6,7 @@
 <title>受注一覧</title>
 </head>
 <body style = "background: linear-gradient(45deg, #e6e6fa, #afaffa)">
-<h1 style="text-align: center;">受注管理システム</h1>
-	<hr
-		style="text-align: center; height: 5px; background-color: black; width: 100%;">
+<%@include file="/common/header.jsp" %>
 	<table style="margin: auto; width: 1300px;">
 		<tr>
 			<td style="text-align: left; width: 100px;">[<a
@@ -26,7 +24,7 @@
 			<th>受注管理状況</th>
 		</tr>
 
-		<table style="margin: auto; padding-bottom: 100px;">
+		<table style="margin: auto; padding-bottom: 250px;">
 			
 			<tr>
 				<th style="background-color: #bbbbbb; width: 200px">No.</th>
@@ -64,13 +62,6 @@
 		</table>
 
 	</div>
-	<hr
-		style="text-align: center; height: 5px; background-color: black; width: 100%;">
-	<table
-		style="margin: auto; border: 0; width: 100%; text-align: center;">
-		<tr>
-			<td align="left">copyright (c) 2024 all rights reserved.</td>
-		</tr>
-	</table>
+	<%@include file="/common/footer.jsp" %>
 </body>
 </html>

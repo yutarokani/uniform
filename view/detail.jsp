@@ -1,9 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="bean.OrderInfo,dao.OrderDetailDAO,java.util.ArrayList"%>
+<%@page import="bean.OrderInfo,dao.OrderDetailDAO"%>
 
 <%
 OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	//DetailServletからデータを受け取る
-ArrayList<OrderInfo> order_list = (ArrayList)request.getAttribute("order_list");
 %>
 
 <html>
@@ -12,8 +11,7 @@ ArrayList<OrderInfo> order_list = (ArrayList)request.getAttribute("order_list");
 <title>受注詳細表示画面</title>
 </head>
 <body style="background: linear-gradient(45deg, #e6e6fa, #afaffa);">
-	<h1 style="text-align: center;">受注管理システム</h1>
-	<hr style="text-align: center; height: 5px; background-color: black; width: 100%;">
+	<%@include file="/common/header.jsp" %>
 	<table style="margin: auto; width: 1300px;">
 		<tr>
 			<td style="text-align: left; width: 100px;">[<a
@@ -43,27 +41,25 @@ ArrayList<OrderInfo> order_list = (ArrayList)request.getAttribute("order_list");
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入者住所</th>
 			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getAdress() %></td>
 		</tr>
-		<%for(int i = 0; i < order_list.size(); i++){ %>
 		<tr>
-			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入した商品番号</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=order_list.get(i).getUniId() %></td>
+			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入した商品</th>
+			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getUniId() %></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入数</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=order_list.get(i).getBuyQuantity() %></td>
+			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getBuyQuantity() %></td>
 		</tr>
-		<%} %>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">注文日</th>
 			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getDay() %></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">入金状況</th>
-			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/update"><%=orderInfo.getPayment() %></a></td>
+			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/update">入金待ち</a></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">発送状況</th>
-			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/update"><%=orderInfo.getShipping() %></a></td>
+			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/update">未発送</a></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">備考欄</th>
@@ -71,11 +67,6 @@ ArrayList<OrderInfo> order_list = (ArrayList)request.getAttribute("order_list");
 		</tr>
 	</table>
 </div>
-<hr style="text-align: center; height: 5px; background-color: black; width: 100%;">
-	<table style="margin: auto; border: 0; width: 100%; text-align: center;">
-		<tr>
-			<td align="left">copyright (c) 2024 all rights reserved.</td>
-		</tr>
-	</table>
+<%@include file="/common/footer.jsp" %>
 </body>
 </html>
