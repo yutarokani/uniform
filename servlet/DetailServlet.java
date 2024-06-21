@@ -1,3 +1,4 @@
+
 package servlet;
 
 import java.io.IOException;
@@ -6,10 +7,12 @@ import java.util.ArrayList;
 import bean.OrderInfo;
 import dao.OrderInfoDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@WebServlet("/detail")
 public class DetailServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,10 +30,11 @@ public class DetailServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 
 			//画面から送信されるorderNumberとcmd情報を受け取る
-			String orderNumber = request.getParameter("orderNumber");
+			String number = request.getParameter("orderNumber");
+			int orderNumber = Integer.parseInt(number);
 			cmd = request.getParameter("cmd");
 
-			//OrderInfoDAOクラスに定義したselectByOrderDetail（）メソッドを利用して詳細情報を取得
+			//OrderInfoDAOクラスに定義したselectByOrderInfo（）メソッドを利用して詳細情報を取得
 			OrderInfo orderInfo = orderInfoDao.selectByOrderNumber(orderNumber);
 			ArrayList<OrderInfo> order_list = orderInfoDao.order(orderNumber);
 

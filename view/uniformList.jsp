@@ -1,4 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.ArrayList,bean.Goods"%>
+
+
 
 <html>
 <head>
@@ -34,22 +37,32 @@
 				style="text-align: center; background-color: #bbbbbb; width: 150px; height: 24px;">削除</th>
 		</tr>
 		<%
-		//ここにJavaコード記述
+		ArrayList<Goods> list = (ArrayList<Goods>)request.getAttribute("goods_list");
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				Goods goods = (Goods) list.get(i);
 		%>
 		<tr>
-			<td style="text-align: center; background-color: #eeeeee; width: 200px;">0001</a></td>
-			<td style="text-align: center; background-color: #eeeeee; width: 200px;">ユニフォームA</td>
-			<td style="text-align: center; background-color: #eeeeee; width: 200px;">\5,000</td>
-			<td style="text-align: center; background-color: #eeeeee; width: 200px;">100</td>
-			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><a
-				href="<%=request.getContextPath()%>">削除</a></td>
+			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getUniId() %></a></td>
+			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getUniName() %></td>
+			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getPrice() %></td>
+			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getStock() %></td>
+			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><a 
+				href="<%=request.getContextPath()%>/delete?uniId=<%= goods.getUniId()%>" onclick="return confirm('商品:<%= goods.getUniName() %> を削除します。本当によろしいですか？')">削除</a></td>
 		</tr>
+		<%
+			} 
+		} else {
+		%>
 		<tr>
 			<td style="text-align: center; width: 200px;">&nbsp;</td>
 			<td style="text-align: center; width: 200px;">&nbsp;</td>
 			<td style="text-align: center; width: 200px;">&nbsp;</td>
 			<td style="text-align: center; width: 200px;" colspan="2">&nbsp;</td>
 		</tr>
+		<%
+		}
+		%>
 	</table>
 	<%@include file="/common/footer.jsp" %>
 </body>

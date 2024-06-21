@@ -1,8 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="bean.OrderInfo,dao.OrderDetailDAO"%>
+<%@page import="java.util.ArrayList,bean.OrderInfo"%>
 
 <%
-OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	//DetailServletからデータを受け取る
+//DetailServletからデータを受け取る
+OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	
+ArrayList<OrderInfo> order_list = (ArrayList<OrderInfo>)request.getAttribute("order_list");
 %>
 
 <html>
@@ -15,7 +17,7 @@ OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	//DetailServ
 	<table style="margin: auto; width: 1300px;">
 		<tr>
 			<td style="text-align: left; width: 100px;">[<a
-				href="<%=request.getContextPath()%>/view/list.jsp">一覧に戻る</a>]
+				href="<%=request.getContextPath()%>/list">一覧に戻る</a>]
 			</td>
 			<td><h2 style="padding-left: 470px;">受注詳細情報</h2></td>
 		</tr>
@@ -39,27 +41,29 @@ OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	//DetailServ
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入者住所</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getAdress() %></td>
+			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getAddress() %></td>
 		</tr>
+		<%for(int i = 0; i < order_list.size(); i++){ %>
 		<tr>
-			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入した商品</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getUniId() %></td>
+			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入した商品番号</th>
+			<td style="width:400px; background-color: #EEEEEE;"><%=order_list.get(i).getUniId() %></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">購入数</th>
-			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getBuyQuantity() %></td>
+			<td style="width:400px; background-color: #EEEEEE;"><%=order_list.get(i).getBuyQuantity() %></td>
 		</tr>
+		<%} %>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">注文日</th>
 			<td style="width:400px; background-color: #EEEEEE;"><%=orderInfo.getDay() %></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">入金状況</th>
-			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/update">入金待ち</a></td>
+			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/view/update.jsp"><%=orderInfo.getPayment() %></a></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">発送状況</th>
-			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/update">未発送</a></td>
+			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/view/update.jsp"><%=orderInfo.getShipping() %></a></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">備考欄</th>

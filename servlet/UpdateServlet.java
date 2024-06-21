@@ -19,8 +19,6 @@ public class UpdateServlet extends HttpServlet {
 
 		String error = "";
 		String cmd = "list";
-		String Email = "";//メール用変数
-		String mailAdress = "";//メールアドレス用変数
 		String title = "";//メールのタイトル用変数
 		String message = ""; // メール本文用変数
 
@@ -32,21 +30,20 @@ public class UpdateServlet extends HttpServlet {
 
 			//ordernumber、name、mail、addres、uniname、other、day、sendday、payment、shipping
 			//入力パラメータを取得
-			String ordernumber = request.getParameter("ordernumber"); //注文番号
-			String name = request.getParameter("name"); //氏名
-			String mail = request.getParameter("mail"); //メール
-			String addres = request.getParameter("addres"); //住所
-			String uniname = request.getParameter("uniname"); //商品名
-			String other = request.getParameter("other"); //備考欄
-			String day = request.getParameter("day"); //注文日
-			String sendday = request.getParameter("sendday"); //発送日
-			String payment = request.getParameter("payment"); //入金状況
-			String shipping = request.getParameter("shipping"); //発送状況
+			String ordernumber = "1";//request.getParameter("ordernumber"); //注文番号
+			String name = "test";//request.getParameter("name"); //氏名
+			String mail = "test";//request.getParameter("mail"); //メール
+			String addres = "test";//request.getParameter("addres"); //住所
+			String uniname = "test";//request.getParameter("uniname"); //商品名
+			String other = "test";//request.getParameter("other"); //備考欄
+			String day = "2024/06/19";//request.getParameter("day"); //注文日
+			String sendday = "2024/06/19";//request.getParameter("sendday"); //発送日
+			String payment = "1";//request.getParameter("payment"); //入金状況
+			String shipping = "1";//request.getParameter("shipping"); //発送状況
 
 			//オブジェクト生成
 			OrderInfoDAO objOrderedItemDAO = new OrderInfoDAO();
 			OrderInfo orderInfo = new OrderInfo();
-			SendMail sendMail_main = new SendMail(); // メール送信のオブジェクト化
 
 			//それぞれが未入力の時のエラー表示
 			if (ordernumber.equals("")) {
@@ -79,7 +76,7 @@ public class UpdateServlet extends HttpServlet {
 			} else if (shipping.equals("")) {
 				error = "発送状況が未入力の為、書籍登録処理は行えませんでした。";
 
-			} else if (request.getParameter("price").equals("")) {
+			} else if (price.equals("")){//request.getParameter("price").equals("")) {
 				error = "Priceが未入力の為、書籍登録処理は行えませんでした。";
 
 			} else {
@@ -100,7 +97,7 @@ public class UpdateServlet extends HttpServlet {
 						title = "入金確認のご連絡";
 						message = name + "様\n\n入金を確認いたしました。\n順次発送準備をさせていただきます。\nしばらくお待ちください。\n\nこの度はご利用いただきありがとうございました。";
 						/* メール送信処理 */
-						sendMail_main.Email(message, mail, title);
+						SendMail.Email(message, mail, title);
 					}
 					
 					if (updateTr.equals("non")) {
@@ -121,7 +118,7 @@ public class UpdateServlet extends HttpServlet {
 						title = "商品発送のご連絡";
 						message = name + "様\n\nご注文頂きました商品を発送いたしました。\nまたのご利用をお待ちしております。";
 						/* メール送信処理 */
-						sendMail_main.Email(message, mail, title);
+						SendMail.Email(message, mail, title);
 					}
 
 					/* データベースを更新 */

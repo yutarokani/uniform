@@ -12,7 +12,7 @@ public class AdminDAO {
 
 	//データベース接続情報
 	private static String RDB_DRIVE = "org.mariadb.jdbc.Driver";
-	private static String URL = "jdbc:mariadb://localhost/mybookdb";
+	private static String URL = "jdbc:mariadb://localhost/uniformdb";
 	private static String USER = "root";
 	private static String PASS = "root123";
 
@@ -39,7 +39,7 @@ public class AdminDAO {
 		con.close();
 	}
 	
-	public Admin selectByUser(String userid, String password) {
+	public Admin selectByUser(String userid) {
 
 		Connection con = null;
 		Statement smt = null;
@@ -50,8 +50,7 @@ public class AdminDAO {
 		try {
 
 			//引数の情報を利用し、検索用のSQL文を文字列として定義
-			String sql = "SELECT * FROM userinfo WHERE user ='"+userid+"' "
-					+ "AND password='"+password+"'";
+			String sql = "SELECT * FROM admininfo WHERE userid ='"+userid+"' ";
 
 			//BookDAOクラスに定義した、getConnection()メソッドを利用してConnectionオブジェクトを生成
 			con = getConnection();

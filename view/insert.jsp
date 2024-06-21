@@ -20,18 +20,18 @@
 	<div>
 		<div style="text-align: center; margin: auto; padding-bottom: 210px;">
 			<form style="text-align: center; margin: auto;"
-				action="<%=request.getContextPath()%>/view/uniformList.jsp">
+				action="<%=request.getContextPath()%>/insert">
 				<table
 					style="text-align: center; margin: auto; padding-bottom: 100px; padding-top: 30px;">
 					<tr>
 						<th
 							style="text-align: center; background-color: #bbbbbb; width: 150px; height: 24px;">商品ID</th>
-						<td><input type="text" name="uniid"></td>
+						<td><input type="text" name="uniId"></td>
 					</tr>
 					<tr>
 						<th
 							style="text-align: center; background-color: #bbbbbb; width: 150px; height: 24px;">商品名</th>
-						<td><input type="text" name="uniname"></td>
+						<td><input type="text" name="uniName"></td>
 					</tr>
 					<tr>
 						<th

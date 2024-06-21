@@ -33,7 +33,7 @@ public class DeleteServlet extends HttpServlet {
 			request.setAttribute("cmd", cmd);
 			
 			if (error.equals("")) {
-				request.getRequestDispatcher("/view/list.jsp").forward(request, response);
+				request.getRequestDispatcher("/uniformlist").forward(request, response);
 			}
 
 		}

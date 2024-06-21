@@ -21,12 +21,15 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		AdminDAO adminDao = new AdminDAO();
-		Admin admin = adminDao.selectByUser(userid, password);
 
 		String error = "";
 		String cmd = "";
+		
+
 
 		try {
+			Admin admin = adminDao.selectByUser(userid);
+			
 			if (admin.getUserid() != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", userid);

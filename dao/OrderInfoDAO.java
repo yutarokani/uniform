@@ -1,3 +1,4 @@
+
 package dao;
 
 import java.sql.Connection;
@@ -38,7 +39,12 @@ public class OrderInfoDAO {
 		ArrayList<OrderInfo> list = new ArrayList<OrderInfo>();
 
 		// SQL文
-		String sql = "SELECT orderinfo.* ,uniforminfo.uniname ,SUM(uniforminfo.price * orderdetail.buyquantity ) as 合計金額 FROM orderdetail JOIN orderinfo ON orderdetail.ordernumber=orderinfo.ordernumber JOIN uniforminfo ON orderdetail.uniid=uniforminfo.uniid GROUP BY orderinfo.ordernumber;";
+		String sql = "SELECT orderinfo.* ,orderdetail.buyquantity,"
+				+ "SUM(uniforminfo.price * orderdetail.buyquantity ) "
+				+ "as 合計金額 FROM orderdetail JOIN orderinfo "
+				+ "ON orderdetail.ordernumber=orderinfo.ordernumber "
+				+ "JOIN uniforminfo ON orderdetail.uniid=uniforminfo.uniid "
+				+ "GROUP BY orderinfo.ordernumber;";
 		try {
 			con = getConnection();
 			smt = con.createStatement();
@@ -49,15 +55,16 @@ public class OrderInfoDAO {
 			// 検索結果を配列に格納
 			while (rs.next()) {
 				OrderInfo info = new OrderInfo();
-				info.setUniId(rs.getString("uniforminfo.uniName"));
-				info.setBuyQuantity(rs.getInt("orderdetail.buyQuantity"));
-				info.setName(rs.getString("orderinfo.name"));
-				info.setMail(rs.getString("orderinfo.mail"));
-				info.setAddress(rs.getString("orderinfo.addres"));
-				info.setDay(rs.getString("orderinfo.day"));
-				info.setSendDay(rs.getString("orderinfo.sendDay"));
-				info.setPayment(rs.getString("orderinfo.payment"));
-				info.setShipping(rs.getString("orderinfo.shipping"));
+				info.setOrderNumber(rs.getInt("orderNumber"));
+				info.setBuyQuantity(rs.getInt("buyquantity"));
+				info.setName(rs.getString("name"));
+				info.setMail(rs.getString("mail"));
+				info.setAddress(rs.getString("address"));
+				info.setDay(rs.getString("day"));
+				info.setSendDay(rs.getString("sendday"));
+				info.setPayment(rs.getString("payment"));
+				info.setShipping(rs.getString("shipping"));
+				info.setUniId(rs.getString("合計金額"));
 				list.add(info);
 			}
 
@@ -119,7 +126,7 @@ public class OrderInfoDAO {
 	}
 
 	//注文番号で検索し、出てきた受注詳細情報の格納されたオブジェクトをを呼び出し元に返却
-	public OrderInfo selectByOrderNumber(String orderNumber) {
+	public OrderInfo selectByOrderNumber(int orderNumber) {
 
 		Connection con = null;
 		Statement smt = null;
@@ -171,7 +178,7 @@ public class OrderInfoDAO {
 		return orderInfo;
 	}
 
-	public ArrayList<OrderInfo> order(String orderNumber){
+	public ArrayList<OrderInfo> order(int orderNumber){
 		Connection con = null;
 		Statement smt = null;
 		ArrayList<OrderInfo> order_list = new ArrayList<OrderInfo>();
