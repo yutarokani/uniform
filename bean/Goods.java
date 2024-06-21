@@ -9,6 +9,8 @@ public class Goods {
 	private int stock;
 	//価格
 	private int price;
+	//購入個数
+	private int buyQuantity;
 
 	
 	public String getUniId() {
@@ -35,12 +37,20 @@ public class Goods {
 		this.stock = stock;
 	}
 	
-		public int getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	public int getBuyQuantity() {
+		return buyQuantity;
+	}
+	
+	public void setBuyQuantity(int buyQuantity) {
+		this.buyQuantity = buyQuantity;
 	}
 }
 

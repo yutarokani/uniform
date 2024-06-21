@@ -4,13 +4,13 @@ public class OrderDetail {
 
 	private int orderNumber; //注文番号
 	private String uniId;    //商品ID
-	private String uniname;  //商品名
+	private int buyQuantity; //購入個数
 	
 	public OrderDetail() {
 
 		this.orderNumber = 0;
 		this.uniId = null;
-		this.uniname = null;
+		this.buyQuantity = 0;
 	}
 
 	public int getOrderNumber() {
@@ -28,13 +28,13 @@ public class OrderDetail {
 	public void setUniId(String uniId) {
 		this.uniId = uniId;
 	}
-
-	public String getUniname() {
-		return uniname;
+	
+	public int getBuyQuantity() {
+		return buyQuantity;
 	}
 	
-	public void setUniname(String uniname) {
-		this.uniname = uniname;
+	public void setBuyQuantity(int buyQuantity) {
+		this.buyQuantity = buyQuantity;
 	}
 
 }
