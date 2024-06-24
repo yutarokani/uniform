@@ -37,7 +37,7 @@
 				<th style="background-color: #bbbbbb; width: 200px">氏名</th>
 				<th style="background-color: #bbbbbb; width: 200px">個数</th>
 				<th style="background-color: #bbbbbb; width: 200px">合計金額</th>
-				<th style="background-color: #bbbbbb; width: 200px">発送日</th>
+				<th style="background-color: #bbbbbb; width: 200px">発注日</th>
 				<th style="background-color: #bbbbbb; width: 200px">入金状況</th>
 				<th style="background-color: #bbbbbb; width: 200px">発送状況</th>
 				<th style="background-color: #bbbbbb; width: 250px" colspan="2">
@@ -57,7 +57,7 @@
 				<td
 					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getUniId()%></td>
 				<td
-					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getSendDay()%></td>
+					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getDay()%></td>
 				<td
 					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getPayment()%></td>
 				<td

@@ -41,6 +41,8 @@
 		if (list != null) {
 			for (int i = 0; i < list.size(); i++) {
 				Goods goods = (Goods) list.get(i);
+				if(!goods.getUniName().equals("")){
+					
 		%>
 		<tr>
 			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getUniId() %></a></td>
@@ -51,7 +53,8 @@
 				href="<%=request.getContextPath()%>/delete?uniId=<%= goods.getUniId()%>" onclick="return confirm('商品:<%= goods.getUniName() %> を削除します。本当によろしいですか？')">削除</a></td>
 		</tr>
 		<%
-			} 
+		} 
+		}
 		} else {
 		%>
 		<tr>

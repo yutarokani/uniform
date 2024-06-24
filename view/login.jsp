@@ -6,19 +6,19 @@ String message = (String) request.getAttribute("message");
 Cookie[] userCookie = request.getCookies();
 
 //ユーザーを管理する変数
-String user = "";
+String userid = "";
 //パスワードを管理する変数
-String pass = "";
+String password = "";
 
 if (userCookie != null) {
 	for(int i = 0; i < userCookie.length; i++) {
 		// クッキーからユーザー情報の取得
-		if (userCookie[i].getName().equals("user")) {
-			user = userCookie[i].getValue();
+		if (userCookie[i].getName().equals("userid")) {
+			userid = userCookie[i].getValue();
 		}
 		// クッキーからパスワード情報の取得
 		if (userCookie[i].getName().equals("password")) {
-			pass = userCookie[i].getValue();
+			password = userCookie[i].getValue();
 		}
 	}
 }
@@ -47,12 +47,12 @@ if (userCookie != null) {
 				<tr>
 					<td
 						style="text-align: center; background-color: #BBBBBB; width: 100">ユーザーID</td>
-					<td><input type=text size="30" name="user"></input></td>
+					<td><input type=text size="30" name="userid" value="<%=userid %>"></input></td>
 				</tr>
 				<tr>
 					<td
 						style="text-align: center; background-color: #BBBBBB; width: 100">パスワード</td>
-					<td><input type=password size="30" name="password"></input></td>
+					<td><input type=password size="30" name="password" value="<%=password %>"></input></td>
 				</tr>
 				<%
 					if (message != null) {

@@ -17,7 +17,7 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String userid = request.getParameter("user");
+		String userid = request.getParameter("userid");
 		String password = request.getParameter("password");
 
 		AdminDAO adminDao = new AdminDAO();
@@ -28,13 +28,13 @@ public class LoginServlet extends HttpServlet {
 
 
 		try {
-			Admin admin = adminDao.selectByUser(userid);
+			Admin admin = adminDao.selectByUser(userid, password);
 			
-			if (admin.getUserid() != null) {
+			if (admin.getUserid() != null || admin.getPassword() != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", userid);
 
-				Cookie useridCookie = new Cookie("user", userid);
+				Cookie useridCookie = new Cookie("userid", userid);
 				useridCookie.setMaxAge(60 * 60 * 24 * 5);
 				response.addCookie(useridCookie);
 
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、書籍登録処理は行えませんでした";
+			error = "DB接続エラーの為、ログインできませんでした";
 			cmd = "login";
 			request.setAttribute("error", error);
 			request.setAttribute("cmd", cmd);

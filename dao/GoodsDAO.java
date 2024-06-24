@@ -207,4 +207,34 @@ public class GoodsDAO {
 		}
 		return goods;
 	}
+	public void update(String uniId,int stock) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+
+			String sql = "UPDATE uniforminfo SET stock = '" + stock + 
+					"' WHERE uniid = '" + uniId + "'";
+			con = GoodsDAO.getConnection();
+			smt = con.createStatement();
+			smt.executeUpdate(sql);
+			
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
 }

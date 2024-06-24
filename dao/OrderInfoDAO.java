@@ -221,8 +221,8 @@ public class OrderInfoDAO {
 
         try {
             //登録用のsql文を発行
-            String sql = "INSERT INTO orderinfo VALUES('" + order.getUniId() + "','" 
-                    + order.getBuyQuantity() + ")";
+            String sql = "INSERT INTO orderdetail(uniid,buyquantity) VALUES('" + order.getUniId() + "','" 
+                    + order.getBuyQuantity() + "')";
             //オブジェクト生成
             con = getConnection();
             smt = con.createStatement();
@@ -248,15 +248,15 @@ public class OrderInfoDAO {
         }
     }
 	
-	public void profileInsert(OrderInfo orderInfo) {
+	public void profileInsert(OrderInfo orderinfo) {
 
 		Connection con = null;
 		Statement smt = null;
 
 		try {
 
-			String sql = "INSERT INTO orderedInfo VALUES('" + "orderinfo.getName()" + "','" + "orderinfo.getMail()" + "',"
-					+ "orderinfo.getAddress()" + "','" + "orderinfo.getOther()" + "',"+")";
+			String sql = "INSERT INTO orderinfo(name,mail,address,other,day) VALUES('" + orderinfo.getName() + "','" + orderinfo.getMail() + "','"
+					+ orderinfo.getAddress() + "','" + orderinfo.getOther() + "','" + orderinfo.getDay() + "')";
 			
 			con = OrderInfoDAO.getConnection();
 			smt = con.createStatement();

@@ -10,7 +10,7 @@
 	<table style="margin: auto; width: 1300px;">
 		<tr>
 			<td style="text-align: left; width: 100px;">[<a
-				href="<%=request.getContextPath()%>/view/uniformList.jsp">商品一覧</a>]
+				href="<%=request.getContextPath()%>/uniformlist">商品一覧</a>]
 			</td>
 			<td><h2 style="padding-left: 470px;">商品登録画面</h2></td>
 		</tr>

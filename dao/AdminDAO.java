@@ -39,7 +39,7 @@ public class AdminDAO {
 		con.close();
 	}
 	
-	public Admin selectByUser(String userid) {
+	public Admin selectByUser(String userid,  String password) {
 
 		Connection con = null;
 		Statement smt = null;
@@ -50,7 +50,8 @@ public class AdminDAO {
 		try {
 
 			//引数の情報を利用し、検索用のSQL文を文字列として定義
-			String sql = "SELECT * FROM admininfo WHERE userid ='"+userid+"' ";
+			String sql = "SELECT * FROM admininfo WHERE userid ='"+userid+"' "
+					+ "AND password='"+password+"'";
 
 			//BookDAOクラスに定義した、getConnection()メソッドを利用してConnectionオブジェクトを生成
 			con = getConnection();
