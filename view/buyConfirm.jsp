@@ -1,4 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="bean.OrderInfo" %>
+
+<%
+OrderInfo orderinfo = (OrderInfo)request.getAttribute("orderinfo");
+String uniname = (String)request.getAttribute("uniname");
+%>
 
 <html>
 <head>
@@ -21,15 +27,15 @@
 			</tr>
 			<tr>
 				<form action="<%=request.getContextPath()%>/view/buyConfirm.jsp" method="post">
-					<td style="text-align: center; background-color: #EEEEEE">仮商品名</td>
-					<td style="text-align: center; background-color: #EEEEEE">仮商品個数(個)</td>
+					<td style="text-align: center; background-color: #EEEEEE"><%= uniname %></td>
+					<td style="text-align: center; background-color: #EEEEEE"><%= orderinfo.getBuyQuantity() %></td>
 			</tr>
 		</table>
 		</p>
 		<p style="font-size: 24px; margin-top: 50px">
 			下記のメールアドレスに<br> 注文情報を送信しました。
 		</p>
-		<p style="margin-top: 50px; margin-bottom: 30px">(仮)system.project.team17@kanda-it-school-system.com</p>
+		<p style="margin-top: 50px; margin-bottom: 30px"><%= orderinfo.getMail() %></p>
 		<a href="<%=request.getContextPath()%>/view/buy.jsp">注文画面に戻る</a>
 	</div>
 	<%@include file="/common/footer.jsp"%>

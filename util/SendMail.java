@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
 
-	public static void Email(String mail, String title, String mailAdress) {
+	public static void sendMail(String mail, String title, String mailAdress) {
 		try {
 			Properties props = System.getProperties();
 

@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td><a style="padding-bottom: 20px; font-size: 20px;"
-					href="<%=request.getContextPath()%>/uniformlist">【商品一覧】</a></td>
+					href="<%=request.getContextPath()%>/list">【商品一覧】</a></td>
 			</tr>
 			<tr>
 				<td><a style="padding-bottom: 20px; font-size: 20px;"

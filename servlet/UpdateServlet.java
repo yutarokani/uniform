@@ -97,7 +97,7 @@ public class UpdateServlet extends HttpServlet {
 						title = "入金確認のご連絡";
 						message = name + "様\n\n入金を確認いたしました。\n順次発送準備をさせていただきます。\nしばらくお待ちください。\n\nこの度はご利用いただきありがとうございました。";
 						/* メール送信処理 */
-						SendMail.Email(message, mail, title);
+						SendMail.sendMail(message, mail, title);
 					}
 					
 					if (updateTr.equals("non")) {
@@ -118,7 +118,7 @@ public class UpdateServlet extends HttpServlet {
 						title = "商品発送のご連絡";
 						message = name + "様\n\nご注文頂きました商品を発送いたしました。\nまたのご利用をお待ちしております。";
 						/* メール送信処理 */
-						SendMail.Email(message, mail, title);
+						SendMail.sendMail(message, mail, title);
 					}
 
 					/* データベースを更新 */

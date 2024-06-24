@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.Goods;
-import bean.OrderInfo;
-import dao.GoodsDAO;
-import dao.OrderInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/insertIntoCart")
 public class InsertIntoCartServlet extends HttpServlet {
@@ -25,41 +23,28 @@ public class InsertIntoCartServlet extends HttpServlet {
 			String uniname = request.getParameter("uniname");
 			int buyQuantity = Integer.parseInt(request.getParameter("buyQuantity"));
 			
-			//uninameの情報を受け取る
-			Goods good = new Goods();
-			GoodsDAO goodDao = new GoodsDAO();
-			good = goodDao.selectByuniname(uniname);
-			//uniIdを受け取る
-			String uniId=good.getUniId();
-			
 			//登録する情報を格納
-			OrderInfo order = new OrderInfo();
+			Goods goods = new Goods();
 			//set
-			order.setUniId(uniId);
-			order.setBuyQuantity(buyQuantity);
-			//insertメソッドでDB登録
-			OrderInfoDAO OrderInfoDAO = new OrderInfoDAO();
-			OrderInfoDAO.insert(order);
+			goods.setUniName(uniname);
+			goods.setBuyQuantity(buyQuantity);
 			
+			//セッションオブジェクトの生成
+			HttpSession session = request.getSession();
 			//arrayリストにすべてのカート情報を格納
-			ArrayList<OrderInfo> order_list = new ArrayList<OrderInfo>();
-			order_list=OrderInfoDAO.selectAll();
-			//リクエストスコープに追加
-			request.setAttribute("order_list",order_list);
-			
-			
-			//商品の価格
-			int price = good.getPrice();
-			//購入金額を計算
-			price = price * buyQuantity;
-			//リクエストスコープに追加
-			request.setAttribute("price",price);
+			ArrayList<Goods> goods_list =(ArrayList<Goods>)session.getAttribute("goods_list");
+			if(goods_list == null){
+				goods_list = new ArrayList<Goods>();
+			}
+			goods_list.add(goods);	
+			//セッションへのデータの登録
+			session.setAttribute("goods_list", goods_list);	
 			//遷移
-			request.getRequestDispatcher("/view/showCart.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/cart.jsp").forward(request, response);
 			
 			//DBエラー
 		} catch (IllegalStateException e) {
-			error = ("DB接続エラーの為、一覧表示は行えませんでした。");
+			error = ("DB接続エラーの為、カート追加は行えませんでした。");
 			cmd = ("logout");
 
 			request.setAttribute("bookMsg", error);
