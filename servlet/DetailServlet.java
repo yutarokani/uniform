@@ -32,7 +32,9 @@ public class DetailServlet extends HttpServlet {
 			//画面から送信されるorderNumberとcmd情報を受け取る
 			String number = request.getParameter("orderNumber");
 			int orderNumber = Integer.parseInt(number);
-			cmd = request.getParameter("cmd");
+			if(request.getParameter("cmd") != null){
+				cmd = request.getParameter("cmd");
+			}
 
 			//OrderInfoDAOクラスに定義したselectByOrderInfo（）メソッドを利用して詳細情報を取得
 			OrderInfo orderInfo = orderInfoDao.selectByOrderNumber(orderNumber);
@@ -71,8 +73,10 @@ public class DetailServlet extends HttpServlet {
 				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 
-			} else {
+			} else if (error == null && !cmd.equals("update")) {
 				request.getRequestDispatcher("/view/detail.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("/view/update.jsp").forward(request, response);
 			}
 		}
 

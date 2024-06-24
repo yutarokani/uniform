@@ -66,7 +66,7 @@
 					style="text-align: center; background-color: #eeeeee; width: 300px">
 
 					<a href="<%=request.getContextPath()%>/detail?orderNumber=<%=orderInfo.getOrderNumber()%>&cmd=detail">詳細</a> 
-					<a href="<%=request.getContextPath()%>/update?orderNumber=<%=orderInfo.getOrderNumber()%>&cmd=update">更新</a>
+					<a href="<%=request.getContextPath()%>/detail?orderNumber=<%=orderInfo.getOrderNumber()%>&cmd=update">更新</a>
 
 				</td>
 			</tr>

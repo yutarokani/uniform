@@ -5,6 +5,7 @@
 //DetailServletからデータを受け取る
 OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");	
 ArrayList<OrderInfo> order_list = (ArrayList<OrderInfo>)request.getAttribute("order_list");
+String cmd = null;
 %>
 
 <html>
@@ -59,11 +60,11 @@ ArrayList<OrderInfo> order_list = (ArrayList<OrderInfo>)request.getAttribute("or
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">入金状況</th>
-			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/view/update.jsp"><%=orderInfo.getPayment() %></a></td>
+			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/detail?orderNumber=<%=orderInfo.getOrderNumber()%>&cmd=update"><%=orderInfo.getPayment() %></a></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">発送状況</th>
-			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/view/update.jsp"><%=orderInfo.getShipping() %></a></td>
+			<td style="width:400px; background-color: #EEEEEE;"><a href="<%=request.getContextPath()%>/detail?orderNumber=<%=orderInfo.getOrderNumber()%>&cmd=update"><%=orderInfo.getShipping() %></a></td>
 		</tr>
 		<tr>
 			<th style="text-align: center; background-color: #BBBBBB; width: 200px; height: 30px;">備考欄</th>

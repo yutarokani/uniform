@@ -1,3 +1,4 @@
+
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.Goods"%>
@@ -57,6 +58,7 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 		</table>
 		<table style="margin: auto; padding-bottom: 30px;">
 		<center>
+		<form action="<%=request.getContextPath()%>/view/buyConfirm.jsp" method="get">
 			<input type="submit" value="購入">
 		</center>
 		</form>

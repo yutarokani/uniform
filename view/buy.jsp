@@ -1,4 +1,4 @@
-.0<%@page contentType="text/html; charset=UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8"%>
 
 <html>
 <head>
@@ -48,12 +48,12 @@
 					<th style="background-color: #bbbbbb; width: 150">商品</th>
 					<td style="background-color: #eeeeee; width: 240; font-size: 100"><select
 						name="uniname">
-							<option value="">5つの選択肢を表示</option>
-							<option>A</option>
-							<option>B</option>
-							<option>C</option>
-							<option>D</option>
-							<option>E</option>
+							<option value="*">5つの選択肢を表示</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+							<option value="D">D</option>
+							<option value="E">E</option>
 					</select></td>
 
 					<br>

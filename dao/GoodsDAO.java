@@ -37,8 +37,8 @@ public class GoodsDAO {
 
 		try {
 
-			String sql = "INSERT INTO uniforminfo VALUES('" + goods.getUniId() + "','" + goods.getUniName() + "',"
-					+ goods.getStock() + "','" + goods.getPrice() + "',"+")";
+			String sql = "INSERT INTO uniforminfo VALUES('" + goods.getUniId() + "','" + goods.getUniName() + "','"
+					+ goods.getStock() + "','" + goods.getPrice() + "'" + ")";
 			con = GoodsDAO.getConnection();
 			smt = con.createStatement();
 			smt.executeUpdate(sql);
@@ -67,7 +67,7 @@ public class GoodsDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "DELETE FROM uniforminfo WHERE uniId = '" + uniId + "'";
+			String sql = "UPDATE uniforminfo SET uniname = '' WHERE uniforminfo.uniid = " + uniId + "'";
 
 			con = GoodsDAO.getConnection();
 			smt = con.createStatement();
@@ -169,6 +169,7 @@ public class GoodsDAO {
 		}
 		return goods;
 	}
+
 	//名前検索
 	public Goods selectByuniname(String uniname) {
 
