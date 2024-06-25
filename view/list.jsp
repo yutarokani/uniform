@@ -5,6 +5,11 @@
 	ArrayList<OrderInfo> orderList = (ArrayList<OrderInfo>)request.getAttribute("order_list");
 	int orderNumber = 0;
 	String cmd = "";
+	/* 日付に関するデータの取得 */
+	int thisMonth = (int)request.getAttribute("thisMonth");
+	int lastMonth = (int)request.getAttribute("lastMonth");
+	int thisSum = (int)request.getAttribute("thisSum");
+	int lastSum = (int)request.getAttribute("lastSum");
 %>
 
 <html>
@@ -25,9 +30,15 @@
 	<hr
 		style="text-align: center; height: 2px; background-color: black; width: 100%">
 	<div>
-	<table style="padding-top: 20px; padding-bottom: 15px;">
-		<tr>
+	<table style="padding-top: 20px; padding-bottom: 15px; margin-right: auto; width: 100%;">
+		<tr style="text-align: left;">
 			<th>受注管理状況</th>
+		</tr>
+		<tr  style="text-align: right;">
+			<th><%= thisMonth %>月の売り上げ（発送完了分）　<%= thisSum %>円</th>
+		</tr>
+		<tr  style="text-align: right;">
+			<th><%= lastMonth %>月の売り上げ（発送完了分）　<%= lastSum %>円</th>
 		</tr>
 	</table>
 		<table style="margin: auto; padding-bottom: 250px;">
