@@ -9,6 +9,7 @@ MyFormat format = new MyFormat();
 
 //セッションからのデータの取得
 ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
+String cmd = "";
 %>
 
 <html>
@@ -31,11 +32,13 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 				<th style="background-color: #BBBBBB; width: 200">商品</th>
 				<th style="background-color: #BBBBBB; width: 200">購入個数</th>
 				<th style="background-color: #BBBBBB; width: 200">小計</th>
+				<th style="background-color: #BBBBBB; width: 200">削除</th>
+				
 			</tr>
 
 			<%
 				int total=0;
-				if (list != null) {
+				if(!list.isEmpty()) {
 				for (int i = 0; i < list.size(); i++) {
 					int price=5000 *(list.get(i).getBuyQuantity());
 				total+=price;
@@ -45,6 +48,9 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 					<td style="text-align: center; background-color: #EEEEEE"><%=list.get(i).getUniName()%></td>
 					<td style="text-align: center; background-color: #EEEEEE"><%=list.get(i).getBuyQuantity()%>個</td>		
 					<td style="text-align: center; background-color: #EEEEEE"> <%=format.moneyFormat(price)%></td>
+					<td style="text-align: center; background-color: #EEEEEE"><a 
+					href="<%=request.getContextPath()%>/insertIntoCart?delno=<%= i %>"onclick="return confirm('商品:<%= list.get(i).getUniName()%>を削除します。本当によろしいですか？')">削除</a></td>
+					
 			</tr>
 			<%
 					}
@@ -66,9 +72,10 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 			<input type="submit" value="購入">
 		</center>
 		</form>
-		<form action="<%=request.getContextPath()%>/view/buy.jsp" method="get">
+		<form action="<%=request.getContextPath()%>/uniformlist?cmd=buy" method="get">
 		<center style="padding-top: 30px; padding-bottom: 110px;">
 			<input type="submit" value="さらに追加">
+			<input type="hidden" name="cmd" value="buy">
 		</center>
 		</form>
 		</table>

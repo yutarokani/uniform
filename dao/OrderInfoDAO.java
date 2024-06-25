@@ -228,6 +228,7 @@ public class OrderInfoDAO {
 
             //クローズ
         } catch (Exception e) {
+        	String error = ""+ e;
             throw new IllegalStateException(e);
         } finally {
             if (smt != null) {

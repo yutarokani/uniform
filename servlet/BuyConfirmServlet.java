@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import bean.Goods;
 import bean.OrderInfo;
@@ -26,7 +27,13 @@ public class BuyConfirmServlet extends HttpServlet {
 		// エラー判別用の変数を宣言
 		String cmd = null;
 		
+		// 日付取得用変数
+		Calendar calendar = Calendar.getInstance();
+
+		
 		try {
+			// 日付の取得
+			int day = calendar.get(Calendar.DATE);
 			
 			//セッションオブジェクトの生成
 			HttpSession session = request.getSession();
@@ -95,8 +102,7 @@ public class BuyConfirmServlet extends HttpServlet {
 				orderinfo.setMail(mail);
 				orderinfo.setAddress(address);
 				orderinfo.setOther(other);
-				orderinfo.setDay("6/24");
-				orderinfo.setSendDay("6/30");
+				orderinfo.setDay(String.valueOf(day));
 				orderinfo.setPayment("入金待ち");
 				orderinfo.setShipping("未");
 				
@@ -152,7 +158,7 @@ public class BuyConfirmServlet extends HttpServlet {
             
             ordermail +=  "またのご利用をお待ちしております。";
 			
-            sendmail.sendMail(ordermail, mail, "ご購入ありがとうございます【神田】");
+            sendmail.sendMail(ordermail, "ご購入ありがとうございます【神田】",mail);
             
             // 在庫数を購入数分減らす
             for(int i = 0; i < goods_list.size(); i++) {

@@ -50,7 +50,7 @@ ArrayList<Goods> goodsList = (ArrayList<Goods>)request.getAttribute("goods_list"
 		</table>
 
 		<form style="padding-bottom: 80px;"
-			action="<%=request.getContextPath()%>/insertIntoCart" method="post">
+			action="<%=request.getContextPath()%>/insertIntoCart" method="get">
 			<table style="margin: auto; padding-bottom: 20px;">
 				<tr>
 					<th style="background-color: #bbbbbb; width: 150">商品</th>

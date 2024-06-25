@@ -1,3 +1,4 @@
+
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <html>
@@ -23,7 +24,7 @@
 				<td>お届け先の情報を入力してください</td>
 			</tr>
 		</table>
-		<form action="<%=request.getContextPath()%>/view/buyConfirm.jsp">
+		<form action="<%=request.getContextPath()%>/buyConfirm" method="post">
 			<table style="margin: auto; padding-bottom: 30px;">
 				<tr>
 					<th style="background-color: #bbbbbb; width: 150">氏名</th>

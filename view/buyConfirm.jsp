@@ -9,6 +9,7 @@ ArrayList<String> uniname_list = (ArrayList<String>)session.getAttribute("uninam
 <html>
 <head>
 <title>購入確認画面</title>
+<link rel="icon" type="image/x-icon" href="../img/rogofabi.ico">
 </head>
 <body style="background: linear-gradient(45deg, #ffff00, #ffccff)">
 	<div align="center" style="text-align: center; padding-bottom: 20px;">
@@ -37,7 +38,7 @@ ArrayList<String> uniname_list = (ArrayList<String>)session.getAttribute("uninam
 			下記のメールアドレスに<br> 注文情報を送信しました。
 		</p>
 		<p style="margin-top: 50px; margin-bottom: 30px"><%= order_list.get(0).getMail() %></p>
-		<a href="<%=request.getContextPath()%>/view/buy.jsp">注文画面に戻る</a>
+		<a href="<%=request.getContextPath()%>/uniformlist?cmd=buy">注文画面に戻る</a>
 	</div>
 	<%@include file="/common/footer.jsp"%>
 </body>
