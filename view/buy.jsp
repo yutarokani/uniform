@@ -1,4 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.ArrayList,bean.Goods"%>
+<%
+ArrayList<Goods> goodsList = (ArrayList<Goods>)request.getAttribute("goods_list");
+%>
+
 
 <html>
 <head>
@@ -12,7 +17,7 @@
 	<table>
 		<td><A href="<%=request.getContextPath()%>/view/login.jsp">[トップへ戻る]</A></td>
 		<td style="text-align: right"><A
-			href="<%=request.getContextPath()%>/view/menu.jsp">[管理者画面]</A></td>
+			href="<%=request.getContextPath()%>/view/login.jsp">[管理者画面]</A></td>
 	</table>
 
 	<div style="text-align: center"></div>
@@ -32,12 +37,15 @@
 				<th><img src="../img/E.png" width="250" height="200" border="3"></th>
 			</tr>
 			<tr>
-
-				<th style="background-color: #eeeeee; width: 250; height: 50">商品A</th>
-				<th style="background-color: #eeeeee; width: 250">商品B</th>
-				<th style="background-color: #eeeeee; width: 250">商品C</th>
-				<th style="background-color: #eeeeee; width: 250">商品D</th>
-				<th style="background-color: #eeeeee; width: 250">商品E</th>
+			
+				
+				<%for(int i=0; i < goodsList.size(); i++){ %>
+							<%if(!goodsList.get(i).getUniName().equals("")) {%>
+							<th style="background-color: #eeeeee; width: 250; height: 50"><%=goodsList.get(i).getUniName() %></th>
+							<%
+							} 
+							}
+							%>
 			</tr>
 		</table>
 
@@ -48,12 +56,14 @@
 					<th style="background-color: #bbbbbb; width: 150">商品</th>
 					<td style="background-color: #eeeeee; width: 240; font-size: 100"><select
 						name="uniname">
-							<option value="*">5つの選択肢を表示</option>
-							<option value="A">A</option>
-							<option value="B">B</option>
-							<option value="C">C</option>
-							<option value="D">D</option>
-							<option value="E">E</option>
+							<option value="*">選択肢を表示</option>
+							<%for(int i=0; i < goodsList.size(); i++){ %>
+							<%if(!goodsList.get(i).getUniName().equals("")) {%>
+							<option value="<%=goodsList.get(i).getUniName() %>"><%=goodsList.get(i).getUniName() %></option>
+							<%
+							} 
+							}
+							%>
 					</select></td>
 
 					<br>

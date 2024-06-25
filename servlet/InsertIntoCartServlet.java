@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.Goods;
+import dao.GoodsDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,12 +36,28 @@ public class InsertIntoCartServlet extends HttpServlet {
 				cmd=("buy");
 			}
 			if(error==null) {
+				GoodsDAO goodsDao = new GoodsDAO();
+				// 売り切れの商品を選択した時のエラー処理
+				if(goodsDao.selectByuniname(uniname).getStock() == 0) {
+					error=("選択した商品は売り切れのため、購入できませんでした。");
+					cmd=("buy");
+					return;
+				}
+				
+				
 				//登録する情報を格納
 				Goods goods = new Goods();
 				int BuyQuantity = Integer.parseInt(strbuyQuantity);
+				
+				//購入数が在庫数を超えるときのエラー処理
+				if(goodsDao.selectByuniname(uniname).getStock() < BuyQuantity) {
+					error = ("購入数が在庫数を超えるため、商品を購入できません。");
+					cmd=("buy");
+					return;
+				}
 				//set
 				goods.setUniName(uniname);
-				goods.setBuyQuantity(BuyQuantity);			
+				goods.setBuyQuantity(BuyQuantity);		
 				//セッションオブジェクトの生成
 				HttpSession session = request.getSession();
 				//arrayリストにすべてのカート情報を格納

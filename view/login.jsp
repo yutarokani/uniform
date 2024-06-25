@@ -33,7 +33,7 @@ if (userCookie != null) {
 	<table style="margin: auto; width: 1300px;">
 		<tr>
 			<td style="text-align: left; width: 100px;">[<a
-				href="<%=request.getContextPath()%>/view/buy.jsp">購入画面へ</a>]
+				href="<%=request.getContextPath()%>/uniformlist?cmd=buy">購入画面へ</a>]
 			</td>
 			<td><h2 style="padding-left: 470px;">ログイン画面</h2></td>
 		</tr>

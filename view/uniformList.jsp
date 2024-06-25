@@ -1,7 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList,bean.Goods"%>
+<%@page import="util.MyFormat"%>
 
-
+<%
+	MyFormat format = new MyFormat();
+%>
 
 <html>
 <head>
@@ -47,7 +50,7 @@
 		<tr>
 			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getUniId() %></a></td>
 			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getUniName() %></td>
-			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getPrice() %></td>
+			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= format.moneyFormat(goods.getPrice()) %></td>
 			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><%= goods.getStock() %></td>
 			<td style="text-align: center; background-color: #eeeeee; width: 200px;"><a 
 				href="<%=request.getContextPath()%>/delete?uniId=<%= goods.getUniId()%>" onclick="return confirm('商品:<%= goods.getUniName() %> を削除します。本当によろしいですか？')">削除</a></td>

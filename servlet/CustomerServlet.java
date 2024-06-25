@@ -55,6 +55,8 @@ public class CustomerServlet extends HttpServlet {
 		} finally {
 			if (error.equals("")) {
 				request.setAttribute("orderedInfo", orderedInfo);
+				request.getRequestDispatcher("/view/customer.jsp").forward(request, response);
+				
 			} else {
 				request.setAttribute("error", error);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);

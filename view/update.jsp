@@ -38,11 +38,10 @@ OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");
 		<tr>
 				<td style="text-align: center; background-color: #EEEEEE"><%=orderInfo.getPayment() %></td>
 				<td><select name="updatePrice">
-							<option value="stay1">変更なし</option>
+							<option value="">変更なし</option>
 							<option value="notPay">入金待ち</option>
 							<option value="pay">入金済み（メールが送信されます）</option>
 				</select></td>
-			</form>
 		</tr>
 	</table>
 	<br>
@@ -57,8 +56,8 @@ OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");
 		<tr>
 			<td style="text-align: center; background-color: #EEEEEE"><%=orderInfo.getShipping() %></td>
 			<th><select name="updateTr">
-						<option value="stay2">変更なし</option>
-						<option value="non">未</option>
+						<option value="">変更なし</option>
+						<option value="non">未発送</option>
 						<option value="notTr">発送準備中</option>
 						<option value="trance">発送済み（メールが送信されます）</option>
 			</select></th>
@@ -67,9 +66,13 @@ OrderInfo orderInfo = (OrderInfo)request.getAttribute("orderInfo");
 	</table>
 	<table style="margin: auto; padding-top: 10px; padding-bottom: 60px;">
 		<tr>
-			<td><input style="margin: auto" type="submit" value="確定"></td>
+			<td><input style="margin: auto" type="submit" value="確定"></input></td>
 		</tr>
-	</table>	
+	</table>
+	
+	<input type="hidden"name="ordernumber"value="<%=orderInfo.getOrderNumber() %>">	
+	<input type="hidden"name="name"value="<%=orderInfo.getName() %>	">
+	<input type="hidden"name="mail"value="<%=orderInfo.getMail() %>	">
 	</form>
 	<br>
 <%@include file="/common/footer.jsp" %>

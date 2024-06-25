@@ -2,7 +2,11 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.Goods"%>
+<%@page import="util.MyFormat"%>
+
 <%
+MyFormat format = new MyFormat();
+
 //セッションからのデータの取得
 ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 %>
@@ -15,7 +19,7 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 	<table style="margin: auto; width: 1300px;">
 		<tr>
 			<td style="text-align: left; width: 100px;">[<a
-				href="<%=request.getContextPath()%>/view/buy.jsp">商品画面へ</a>]
+				href="<%=request.getContextPath()%>/uniformlist?cmd=buy">商品画面へ</a>]
 			</td>
 			<td><h2 style="padding-left: 400px;">商品をカートへ追加しました。</h2></td>
 		</tr>
@@ -40,7 +44,7 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 				<form action="<%=request.getContextPath()%>/view/customer.jsp" method="get">
 					<td style="text-align: center; background-color: #EEEEEE"><%=list.get(i).getUniName()%></td>
 					<td style="text-align: center; background-color: #EEEEEE"><%=list.get(i).getBuyQuantity()%>個</td>		
-					<td style="text-align: center; background-color: #EEEEEE"> <%=price%></td>
+					<td style="text-align: center; background-color: #EEEEEE"> <%=format.moneyFormat(price)%></td>
 			</tr>
 			<%
 					}
@@ -52,7 +56,7 @@ ArrayList<Goods> list = (ArrayList<Goods>)session.getAttribute("goods_list");
 		<table style="margin: auto; padding-bottom: 30px">
 			<tr>
 			<th style="background-color: #BBBBBB; width: 100px">合計</th>
-			<th style="text-align: center; background-color: #EEEEEE; width: 150px"><%= total%></th>
+			<th style="text-align: center; background-color: #EEEEEE; width: 150px"><%= format.moneyFormat(total)%></th>
 			</tr>
 			<%} %>
 		</table>

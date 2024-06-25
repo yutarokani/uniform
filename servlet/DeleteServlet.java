@@ -25,15 +25,15 @@ public class DeleteServlet extends HttpServlet {
 			goodsDao.delete(uniId);
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、一覧表示は行えませんでした。";
-			cmd = "menu";
+			error = "DB接続エラーの為、削除処理は行えませんでした。";
+			cmd = "logout";
 		} finally {
-			
-			request.setAttribute("error", error);
-			request.setAttribute("cmd", cmd);
-			
 			if (error.equals("")) {
 				request.getRequestDispatcher("/uniformlist").forward(request, response);
+			}else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 
 		}

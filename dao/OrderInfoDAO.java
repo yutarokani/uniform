@@ -88,17 +88,14 @@ public class OrderInfoDAO {
 		return list;
 	}
 
-	// 該当注文情報の更新処理を行うメソッド
 	public void update(OrderInfo orderedinfo) {
 		// 変数宣言
 		Connection con = null;
 		Statement smt = null;
-
 		// SQL文
-		String sql = "UPDATE orderinfo SET payment='" + orderedinfo.getPayment()
-				+ "',shipping=" + orderedinfo.getShipping()
-				+ " WHERE ordernumber='" + orderedinfo.getOrderNumber() + "'";
-
+		String sql = "UPDATE orderinfo SET payment='"+orderedinfo.getPayment()+"',"
+		 		+ "shipping='"+orderedinfo.getShipping()+"'"+" WHERE orderinfo.ordernumber='"+orderedinfo.getOrderNumber()+"'";
+		
 		try {
 			con = getConnection();
 			smt = con.createStatement();

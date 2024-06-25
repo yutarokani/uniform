@@ -78,6 +78,7 @@ public class ListServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、受注一覧は表示できませんでした。";
+			cmd = "logout";
 
 		}catch(Exception e) {
 			error = ""+ e;
@@ -92,6 +93,7 @@ public class ListServlet extends HttpServlet {
 				request.getRequestDispatcher("/view/update.jsp").forward(request, response);
 			} else {
 				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 		}

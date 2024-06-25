@@ -18,7 +18,7 @@ public class UpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String error = "";
-		String cmd = "list";
+		String cmd = "";
 		String title = "";//メールのタイトル用変数
 		String message = ""; // メール本文用変数
 
@@ -28,18 +28,19 @@ public class UpdateServlet extends HttpServlet {
 			String price = request.getParameter("updatePrice"); // 入金状況
 			String updateTr = request.getParameter("updateTr"); // 発送状況
 
-			//ordernumber、name、mail、addres、uniname、other、day、sendday、payment、shipping
-			//入力パラメータを取得
+			
 			String ordernumber = request.getParameter("ordernumber"); //注文番号
 			String name = request.getParameter("name"); //氏名
 			String mail = request.getParameter("mail"); //メール
 
 			//オブジェクト生成
-			OrderInfoDAO objOrderedItemDAO = new OrderInfoDAO();
 			OrderInfo orderInfo = new OrderInfo();
+			OrderInfoDAO objOrderInfoDAO = new OrderInfoDAO();
+			//各setterメソッドを利用し、②で取得したやつを設定
+			orderInfo.setOrderNumber(Integer.parseInt(ordernumber));
 
 			/* update.jspで変更が行われた際処理 */
-			if (price != null || updateTr != null) {
+			if (price != "" && updateTr != "") {
 
 				if (price.equals("notPay")) {
 
@@ -79,27 +80,21 @@ public class UpdateServlet extends HttpServlet {
 				}
 
 				/* データベースを更新 */
-				objOrderedItemDAO.update(orderInfo);
+				objOrderInfoDAO.update(orderInfo);
 			}
-
-			//Bookのオブジェクトを生成し、各setterメソッドを利用し、②で取得したやつを設定
-			orderInfo.setOrderNumber(Integer.parseInt(ordernumber));
-
-			//③で設定したOrderedItemのオブジェクトを引数として、OrderedItemDAOをインスタンス化し、関連メソッドを呼び出す
-			objOrderedItemDAO.update(orderInfo);
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、更新できませんでした。";
-			cmd = "menu";
+			cmd = "logout";
 
 		} finally {
 			if (error.equals("")) {
-				request.setAttribute("cmd", cmd);
 				//「ListServlet」へフォワード
 				request.getRequestDispatcher("/list").forward(request, response);
 
 			} else {
 				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 

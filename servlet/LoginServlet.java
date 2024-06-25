@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、ログインできませんでした";
-			cmd = "login";
+			cmd = "logout";
 			request.setAttribute("error", error);
 			request.setAttribute("cmd", cmd);
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);

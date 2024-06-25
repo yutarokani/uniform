@@ -67,7 +67,7 @@ public class GoodsDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "UPDATE uniforminfo SET uniname = '' WHERE uniforminfo.uniid = " + uniId + "'";
+			String sql = "UPDATE uniforminfo SET uniname = '' WHERE uniforminfo.uniid = '" + uniId + "'";
 
 			con = GoodsDAO.getConnection();
 			smt = con.createStatement();
@@ -207,7 +207,7 @@ public class GoodsDAO {
 		}
 		return goods;
 	}
-	public void update(String uniId,int stock) {
+	public void update(String uniname,int stock) {
 
 		Connection con = null;
 		Statement smt = null;
@@ -215,11 +215,11 @@ public class GoodsDAO {
 		try {
 
 			String sql = "UPDATE uniforminfo SET stock = '" + stock + 
-					"' WHERE uniid = '" + uniId + "'";
+					"' WHERE uniname = '" + uniname + "'";
 			con = GoodsDAO.getConnection();
 			smt = con.createStatement();
 			smt.executeUpdate(sql);
-			
+
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		} finally {

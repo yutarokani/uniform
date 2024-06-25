@@ -1,7 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList,bean.OrderInfo"%>
+<%@page import="util.MyFormat"%>
 
 <%
+	MyFormat format = new MyFormat();
+
 	ArrayList<OrderInfo> orderList = (ArrayList<OrderInfo>)request.getAttribute("order_list");
 	int orderNumber = 0;
 	String cmd = "";
@@ -35,10 +38,10 @@
 			<th>受注管理状況</th>
 		</tr>
 		<tr  style="text-align: right;">
-			<th><%= thisMonth %>月の売り上げ（発送完了分）　<%= thisSum %>円</th>
+			<th><%= thisMonth %>月の売り上げ（発送完了分）　<%= format.moneyFormat(thisSum) %>円</th>
 		</tr>
 		<tr  style="text-align: right;">
-			<th><%= lastMonth %>月の売り上げ（発送完了分）　<%= lastSum %>円</th>
+			<th><%= lastMonth %>月の売り上げ（発送完了分）　<%= format.moneyFormat(lastSum) %>円</th>
 		</tr>
 	</table>
 		<table style="margin: auto; padding-bottom: 250px;">
@@ -66,7 +69,7 @@
 					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getBuyQuantity()%></td>
 					
 				<td
-					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getUniId()%></td>
+					style="text-align: center; background-color: #eeeeee; width: 200px"><%=format.moneyFormat(Integer.parseInt(orderInfo.getUniId()))%></td>
 				<td
 					style="text-align: center; background-color: #eeeeee; width: 200px"><%=orderInfo.getDay()%></td>
 				<td

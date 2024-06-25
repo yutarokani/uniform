@@ -23,25 +23,37 @@ public class UniformListServlet extends HttpServlet {
 		Goods goods = new Goods();
 
 		String error = "";
+		String cmd = "";
 
 		try {
 
 			// 書籍情報を格納するAllayListオブジェクトを生成、BookDAOクラスに定義した、selectAll()メソッドを利用して書籍情報を取得
 			ArrayList<Goods> goodsList = objDao.selectAll();
+			
+			if(request.getParameter("cmd") != null) {
+				//リクエストスコープからcmdを格納
+				cmd = request.getParameter("cmd");
+			}
 
 			// 取得した書籍情報を「goods_list」という名前でリクエストスコープに登録
 			request.setAttribute("goods_list", goodsList);
 
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、登録できませんでした。";
+			error = "DB接続エラーの為、商品一覧は表示できませんでした。";
+			cmd = "logout";
 
 		} finally {
+			
+			if(cmd.equals("buy")) {
+				request.getRequestDispatcher("/view/buy.jsp").forward(request, response);
+			}
 			if (error.equals("")) {
 				// list.jspにフォワード
 				request.getRequestDispatcher("/view/uniformList.jsp").forward(request, response);
 			} else {
 				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 		}
