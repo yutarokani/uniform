@@ -7,7 +7,7 @@
 	<table
 		style="margin: auto; border: 0; width: 100%; text-align: center;">
 		<tr>
-			<td align="left">copyright (c) 2024 all rights reserved.</td>
+			<td align="center"><img src="../img/rogo.png" width="80" height="80"></td>
 		</tr>
 	</table>
 </body>
