@@ -33,7 +33,11 @@ public class BuyConfirmServlet extends HttpServlet {
 		
 		try {
 			// 日付の取得
-			int day = calendar.get(Calendar.DATE);
+			int year = calendar.get(Calendar.YEAR);
+		    int month = calendar.get(Calendar.MONTH);
+		    int day = calendar.get(Calendar.DATE);
+		    
+		    String today = year + "-" + (month + 1) + "-" + day;
 			
 			//セッションオブジェクトの生成
 			HttpSession session = request.getSession();
@@ -102,9 +106,9 @@ public class BuyConfirmServlet extends HttpServlet {
 				orderinfo.setMail(mail);
 				orderinfo.setAddress(address);
 				orderinfo.setOther(other);
-				orderinfo.setDay(String.valueOf(day));
+				orderinfo.setDay(today);
 				orderinfo.setPayment("入金待ち");
-				orderinfo.setShipping("未");
+				orderinfo.setShipping("未発送");
 				
 				// 注文情報用の配列に格納
 				order_list.add(orderinfo);
@@ -158,7 +162,7 @@ public class BuyConfirmServlet extends HttpServlet {
             
             ordermail +=  "またのご利用をお待ちしております。";
 			
-            sendmail.sendMail(ordermail, "ご購入ありがとうございます【神田】",mail);
+            sendmail.sendMail(ordermail,  "ご購入ありがとうございます【神田】", mail);
             
             // 在庫数を購入数分減らす
             for(int i = 0; i < goods_list.size(); i++) {
