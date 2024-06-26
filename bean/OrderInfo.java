@@ -12,7 +12,6 @@ public class OrderInfo {
 	private String other;//備考欄
 	private int buyQuantity; // 購入個数
 	private String day;//注文日
-	private String sendDay; // 発送日
 	private String payment; // 入金状況
 	private String shipping; // 発送状況
 
@@ -26,7 +25,6 @@ public class OrderInfo {
 		this.other = null;
 		this.buyQuantity = 0;
 		this.day = null;
-		this.sendDay = null;
 		this.payment = null;
 		this.shipping = null;
 	}
@@ -97,15 +95,6 @@ public class OrderInfo {
 
 	public void setDay(String day) {
 		this.day = day;
-	}
-
-	// sendday アクセサメソッド
-	public String getSendDay() {
-		return sendDay;
-	}
-
-	public void setSendDay(String sendday) {
-		this.sendDay = sendday;
 	}
 
 	// payment アクセサメソッド

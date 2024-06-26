@@ -74,7 +74,6 @@ public class OrderDetailDAO {
 				orderinfo.setOther(rs.getString("other"));
 				orderinfo.setBuyQuantity(rs.getInt("buyquantity"));
 				orderinfo.setDay(rs.getString("day"));
-				orderinfo.setSendDay(rs.getString("sendday"));
 				orderinfo.setPayment(rs.getString("payment"));
 				orderinfo.setShipping(rs.getString("shipping"));
 			}

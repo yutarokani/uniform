@@ -61,7 +61,6 @@ public class OrderInfoDAO {
 				info.setMail(rs.getString("mail"));
 				info.setAddress(rs.getString("address"));
 				info.setDay(rs.getString("day"));
-				info.setSendDay(rs.getString("sendday"));
 				info.setPayment(rs.getString("payment"));
 				info.setShipping(rs.getString("shipping"));
 				info.setUniId(rs.getString("合計金額"));
@@ -93,9 +92,10 @@ public class OrderInfoDAO {
 		Connection con = null;
 		Statement smt = null;
 		// SQL文
-		String sql = "UPDATE orderinfo SET payment='"+orderedinfo.getPayment()+"',"
-		 		+ "shipping='"+orderedinfo.getShipping()+"'"+" WHERE orderinfo.ordernumber='"+orderedinfo.getOrderNumber()+"'";
-		
+		String sql = "UPDATE orderinfo SET payment='" + orderedinfo.getPayment() + "',"
+				+ "shipping='" + orderedinfo.getShipping() + "'" + " WHERE orderinfo.ordernumber='"
+				+ orderedinfo.getOrderNumber() + "'";
+
 		try {
 			con = getConnection();
 			smt = con.createStatement();
@@ -142,20 +142,19 @@ public class OrderInfoDAO {
 			smt = con.createStatement();
 
 			ResultSet rs = smt.executeQuery(sql);
-			
+
 			//結果セットからデータを取り出し、orderDetailオブジェクトに格納
-			while(rs.next()) {
+			while (rs.next()) {
 				orderInfo.setOrderNumber(rs.getInt("orderNumber"));
 				orderInfo.setName(rs.getString("name"));
 				orderInfo.setMail(rs.getString("mail"));
 				orderInfo.setAddress(rs.getString("address"));
 				orderInfo.setOther(rs.getString("other"));
 				orderInfo.setDay(rs.getString("day"));
-				orderInfo.setSendDay(rs.getString("sendDay"));
 				orderInfo.setPayment(rs.getString("payment"));
 				orderInfo.setShipping(rs.getString("shipping"));
 			}
-			
+
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		} finally {
@@ -175,7 +174,7 @@ public class OrderInfoDAO {
 		return orderInfo;
 	}
 
-	public ArrayList<OrderInfo> order(int orderNumber){
+	public ArrayList<OrderInfo> order(int orderNumber) {
 		Connection con = null;
 		Statement smt = null;
 		ArrayList<OrderInfo> order_list = new ArrayList<OrderInfo>();
@@ -207,45 +206,44 @@ public class OrderInfoDAO {
 
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
-		} 
+		}
 		return order_list;
 	}
-		
+
 	public void insert(OrderInfo order) {
 
-        Connection con = null;
-        Statement smt = null;
+		Connection con = null;
+		Statement smt = null;
 
-        try {
-            //登録用のsql文を発行
-            String sql = "INSERT INTO orderdetail(uniid,buyquantity) VALUES('" + order.getUniId() + "','" 
-                    + order.getBuyQuantity() + "')";
-            //オブジェクト生成
-            con = getConnection();
-            smt = con.createStatement();
-            //データベースに登録
-            smt.executeUpdate(sql);
+		try {
+			//登録用のsql文を発行
+			String sql = "INSERT INTO orderdetail(uniid,buyquantity) VALUES('" + order.getUniId() + "','"
+					+ order.getBuyQuantity() + "')";
+			//オブジェクト生成
+			con = getConnection();
+			smt = con.createStatement();
+			//データベースに登録
+			smt.executeUpdate(sql);
 
-            //クローズ
-        } catch (Exception e) {
-        	String error = ""+ e;
-            throw new IllegalStateException(e);
-        } finally {
-            if (smt != null) {
-                try {
-                    smt.close();
-                } catch (SQLException ignore) {
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ignore) {
-                }
-            }
-        }
-    }
-	
+			//クローズ
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
 	public void profileInsert(OrderInfo orderinfo) {
 
 		Connection con = null;
@@ -253,9 +251,12 @@ public class OrderInfoDAO {
 
 		try {
 
-			String sql = "INSERT INTO orderinfo(name,mail,address,other,day) VALUES('" + orderinfo.getName() + "','" + orderinfo.getMail() + "','"
-					+ orderinfo.getAddress() + "','" + orderinfo.getOther() + "','" + orderinfo.getDay() + "')";
-			
+			String sql = "INSERT INTO orderinfo(name,mail,address,other,day,payment,shipping) VALUES('"
+					+ orderinfo.getName() + "','" + orderinfo.getMail() + "','"
+					+ orderinfo.getAddress() + "','" + orderinfo.getOther() + "','"
+					+ orderinfo.getDay() + "','" + orderinfo.getPayment() + "','"
+					+ orderinfo.getShipping() + "')";
+
 			con = OrderInfoDAO.getConnection();
 			smt = con.createStatement();
 			smt.executeUpdate(sql);

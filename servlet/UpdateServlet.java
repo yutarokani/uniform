@@ -37,10 +37,11 @@ public class UpdateServlet extends HttpServlet {
 			OrderInfo orderInfo = new OrderInfo();
 			OrderInfoDAO objOrderInfoDAO = new OrderInfoDAO();
 			//各setterメソッドを利用し、②で取得したやつを設定
-			orderInfo.setOrderNumber(Integer.parseInt(ordernumber));
+			int number=Integer.parseInt(ordernumber);
+			orderInfo.setOrderNumber(number);
 
 			/* update.jspで変更が行われた際処理 */
-			if (price != "" && updateTr != "") {
+			
 
 				if (price.equals("notPay")) {
 
@@ -56,6 +57,11 @@ public class UpdateServlet extends HttpServlet {
 					message = name + "様\n\n入金を確認いたしました。\n順次発送準備をさせていただきます。\nしばらくお待ちください。\n\nこの度はご利用いただきありがとうございました。";
 					/* メール送信処理 */
 					SendMail.sendMail(message, title, mail);
+					
+				}else if(price==""){
+					OrderInfo remainOrderInfo = objOrderInfoDAO.selectByOrderNumber(number);
+					String Price=remainOrderInfo.getPayment();
+					orderInfo.setPayment(Price);
 				}
 
 				if (updateTr.equals("non")) {
@@ -77,11 +83,16 @@ public class UpdateServlet extends HttpServlet {
 					message = name + "様\n\nご注文頂きました商品を発送いたしました。\nまたのご利用をお待ちしております。";
 					/* メール送信処理 */
 					SendMail.sendMail(message, title, mail);
+				}else if(updateTr==""){
+					OrderInfo remainOrderInfo = objOrderInfoDAO.selectByOrderNumber(number);
+					String Shipping=remainOrderInfo.getShipping();
+					orderInfo.setShipping(Shipping);
+					
 				}
 
 				/* データベースを更新 */
 				objOrderInfoDAO.update(orderInfo);
-			}
+			
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、更新できませんでした。";

@@ -30,13 +30,13 @@ public class CustomerServlet extends HttpServlet {
 		try {
 
 			if (name.equals("")) {
-				error = "氏名が未入力の為、書籍登録処理は行えませんでした。";
+				error = "氏名が未入力の為、購入は行えませんでした。";
 
 			} else if (mail.equals("")) {
-				error = "メールアドレスが未入力の為、書籍登録処理は行えませんでした。";
+				error = "メールアドレスが未入力の為、購入は行えませんでした。";
 
 			} else if (address.equals("")) {
-				error = "住所が未入力の為、書籍登録処理は行えませんでした。";
+				error = "住所が未入力の為、購入は行えませんでした。";
 
 			} else {
 

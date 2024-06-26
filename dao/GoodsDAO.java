@@ -30,6 +30,37 @@ public class GoodsDAO {
 		}
 	}
 
+	public void update(String uniname,int stock) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+
+			String sql = "UPDATE uniforminfo SET stock = '" + stock + 
+					"' WHERE uniname = '" + uniname + "'";
+			con = GoodsDAO.getConnection();
+			smt = con.createStatement();
+			smt.executeUpdate(sql);
+			
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
 	public void insert(Goods goods) {
 
 		Connection con = null;
@@ -72,7 +103,7 @@ public class GoodsDAO {
 			con = GoodsDAO.getConnection();
 			smt = con.createStatement();
 
-			smt.executeQuery(sql);
+			smt.executeUpdate(sql);
 
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -206,35 +237,5 @@ public class GoodsDAO {
 			}
 		}
 		return goods;
-	}
-	public void update(String uniname,int stock) {
-
-		Connection con = null;
-		Statement smt = null;
-
-		try {
-
-			String sql = "UPDATE uniforminfo SET stock = '" + stock + 
-					"' WHERE uniname = '" + uniname + "'";
-			con = GoodsDAO.getConnection();
-			smt = con.createStatement();
-			smt.executeUpdate(sql);
-
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
-		} finally {
-			if (smt != null) {
-				try {
-					smt.close();
-				} catch (SQLException ignore) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ignore) {
-				}
-			}
-		}
 	}
 }

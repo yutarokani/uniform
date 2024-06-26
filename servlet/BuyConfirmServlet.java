@@ -76,6 +76,10 @@ public class BuyConfirmServlet extends HttpServlet {
 				error = "メール欄が入力されていないので、購入できませんでした。";
 				cmd = "confirm";
 				return;
+			}else if(!mail.contains("@")){// メール欄に「@」が含まれているかチェック
+				error = "メールアドレスに「@」が含まれていませんでした。";
+				cmd = "confirm";
+				return;
 			}else if(address.isEmpty()) {
 				error = "住所欄が入力されていないので、購入できませんでした。";
 				cmd = "confirm";
@@ -178,7 +182,7 @@ public class BuyConfirmServlet extends HttpServlet {
 		}catch(IllegalStateException e) {
 			// DB接続エラー用の文を格納
 			error = "DB接続エラーの為、購入はできません。";
-			cmd = "confirm";
+			cmd = "buy";
 			return;
 			
 		}catch(Exception e) {

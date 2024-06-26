@@ -30,11 +30,11 @@ ArrayList<Goods> goodsList = (ArrayList<Goods>)request.getAttribute("goods_list"
 		</table>
 		<table style="margin: auto">
 			<tr>
-				<th><img src="../img/A.png" width="250" height="200" border="3"></th>
-				<th><img src="../img/B.png" width="250" height="200" border="3"></th>
-				<th><img src="../img/C.png" width="250" height="200" border="3"></th>
-				<th><img src="../img/D.png" width="250" height="200" border="3"></th>
-				<th><img src="../img/E.png" width="250" height="200" border="3"></th>
+				<th><img src="<%=request.getContextPath()%>/img/A.png" width="250" height="200" border="3"></th>
+				<th><img src="<%=request.getContextPath()%>/img/B.png" width="250" height="200" border="3"></th>
+				<th><img src="<%=request.getContextPath()%>/img/C.png" width="250" height="200" border="3"></th>
+				<th><img src="<%=request.getContextPath()%>/img/D.png" width="250" height="200" border="3"></th>
+				<th><img src="<%=request.getContextPath()%>/img/E.png" width="250" height="200" border="3"></th>
 			</tr>
 			<tr>
 			

@@ -58,15 +58,17 @@ public class ListServlet extends HttpServlet {
 				String[] nums = orderMonth.split("-"); // 分割して取得
 				int monthNum = Integer.parseInt(nums[1]); // int 型に変換
 				
-				/* 注文日と参照日を比較 */
-				if(monthNum == thisMonth) {
-					
-					thisSum += Integer.parseInt(orderInfo.getUniId()); // 合計金額
-					
-				} else if(monthNum == lastMonth) {
-					
-					lastSum += Integer.parseInt(orderInfo.getUniId()); // 合計金額
-					
+				if(orderInfo.getShipping().equals("発送済み")) {
+					/* 注文日と参照日を比較 */
+					if(monthNum == thisMonth) {
+						
+						thisSum += Integer.parseInt(orderInfo.getUniId()); // 合計金額
+						
+					} else if(monthNum == lastMonth) {
+						
+						lastSum += Integer.parseInt(orderInfo.getUniId()); // 合計金額
+						
+					}
 				}
 			}
 			
