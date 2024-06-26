@@ -44,7 +44,7 @@ public class OrderInfoDAO {
 				+ "as 合計金額 FROM orderdetail JOIN orderinfo "
 				+ "ON orderdetail.ordernumber=orderinfo.ordernumber "
 				+ "JOIN uniforminfo ON orderdetail.uniid=uniforminfo.uniid "
-				+ "GROUP BY orderinfo.ordernumber;";
+				+ "GROUP BY orderinfo.ordernumber ORDER BY ordernumber DESC;";
 		try {
 			con = getConnection();
 			smt = con.createStatement();

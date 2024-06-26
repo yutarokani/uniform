@@ -19,21 +19,19 @@ public class UniformListServlet extends HttpServlet {
 
 		// GoodsDAOクラスのオブジェクトを生成
 		GoodsDAO objDao = new GoodsDAO();
-
-		Goods goods = new Goods();
-
 		String error = "";
 		String cmd = "";
 
 		try {
-
-			// 書籍情報を格納するAllayListオブジェクトを生成、BookDAOクラスに定義した、selectAll()メソッドを利用して書籍情報を取得
-			ArrayList<Goods> goodsList = objDao.selectAll();
-			
 			if(request.getParameter("cmd") != null) {
 				//リクエストスコープからcmdを格納
 				cmd = request.getParameter("cmd");
 			}
+
+			// 書籍情報を格納するAllayListオブジェクトを生成、BookDAOクラスに定義した、selectAll()メソッドを利用して書籍情報を取得
+			ArrayList<Goods> goodsList = objDao.selectAll();
+			
+			
 
 			// 取得した書籍情報を「goods_list」という名前でリクエストスコープに登録
 			request.setAttribute("goods_list", goodsList);
@@ -41,7 +39,11 @@ public class UniformListServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、商品一覧は表示できませんでした。";
-			cmd = "logout";
+			if(cmd.equals("buy")) {
+				cmd = "error";
+			}else {
+				cmd = "logout";
+			}
 
 		} finally {
 			
@@ -52,6 +54,9 @@ public class UniformListServlet extends HttpServlet {
 				// list.jspにフォワード
 				request.getRequestDispatcher("/view/uniformList.jsp").forward(request, response);
 			} else {
+				if(cmd.equals("error")) {
+					cmd = "buy";
+				}
 				request.setAttribute("error", error);
 				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);

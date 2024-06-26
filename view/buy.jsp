@@ -15,7 +15,7 @@ ArrayList<Goods> goodsList = (ArrayList<Goods>)request.getAttribute("goods_list"
 		<h2 style="text-align: center">商品注文</h2>
 	</div>
 	<table>
-		<td><A href="<%=request.getContextPath()%>/view/login.jsp">[トップへ戻る]</A></td>
+		<td><A href="<%=request.getContextPath()%>/view/homepage.jsp">[トップへ戻る]</A></td>
 		<td style="text-align: right"><A
 			href="<%=request.getContextPath()%>/view/login.jsp">[管理者画面]</A></td>
 	</table>
